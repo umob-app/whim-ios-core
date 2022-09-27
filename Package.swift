@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "whim-ios-core",
+    platforms: [
+        .iOS(.v14)
+    ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -17,6 +20,7 @@ let package = Package(
         .package(url: "https://github.com/Quick/Quick.git", .upToNextMajor(from: "4.0.0")),
         .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "9.0.0")),
         .package(url: "https://github.com/maasglobal/whim-ios-utils.git", branch: "main"),
+        .package(url: "https://github.com/maasglobal/whim-ios-random.git", branch: "main"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -25,6 +29,7 @@ let package = Package(
             name: "WhimCore",
             dependencies: [
                 .product(name: "WhimUtils", package: "whim-ios-utils"),
+                .product(name: "WhimRandom", package: "whim-ios-random"),
                 .product(name: "RxCocoa", package: "RxSwift"),
                 "RxSwift",
             ]),
@@ -34,6 +39,9 @@ let package = Package(
                 "WhimCore",
                 "Quick",
                 "Nimble",
+                .product(name: "WhimRandom", package: "whim-ios-random"),
+                .product(name: "RxTest", package: "RxSwift"),
+                .product(name: "RxBlocking", package: "RxSwift"),
             ]),
     ]
 )

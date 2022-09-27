@@ -13,6 +13,8 @@ extension Bundle {
     }
 }
 
-func image(named: String) -> UIImage? {
-    return UIImage(named: named, in: Bundle.resources, compatibleWith: nil)
+extension WhimCore {
+    static func image(named: String) -> UIImage? {
+        return UIImage(named: named, in: Bundle.resources, compatibleWith: nil)
+    }
 }

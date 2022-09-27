@@ -398,7 +398,7 @@ public extension Feedback {
     static func imperative(effects: @escaping (@escaping (Event) -> Void) -> (State, Event) -> Void) -> Feedback {
         Feedback(events: { scheduler, input in
             Observable.create { observer in
-                input.compactMap(zip).subscribe(onNext: effects({ event in observer.on(.next(event)) }))
+                input.compactMap(WhimCore.zip).subscribe(onNext: effects({ event in observer.on(.next(event)) }))
             }
             .observe(on:scheduler)
         })

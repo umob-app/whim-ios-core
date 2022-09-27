@@ -323,8 +323,8 @@ extension MapSidebarItem {
         case .trackUser:
             return .image(
                 isHighlighted
-                    ? image(named: "map-icon-location-filled")!
-                    : image(named: "map-icon-location")!
+                ? WhimCore.image(named: "map-icon-location-filled")!
+                : WhimCore.image(named: "map-icon-location")!
             )
         case let .reload(reload):
             return .view(reload)
@@ -333,8 +333,8 @@ extension MapSidebarItem {
         case let .filter(isHighlighted):
             return .image(
                 isHighlighted
-                    ? image(named: "map-icon-filter-filled")!
-                    : image(named: "map-icon-filter")!
+                ? WhimCore.image(named: "map-icon-filter-filled")!
+                : WhimCore.image(named: "map-icon-filter")!
             )
         }
     }
