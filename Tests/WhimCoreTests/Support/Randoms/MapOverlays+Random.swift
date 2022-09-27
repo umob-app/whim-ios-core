@@ -1,5 +1,5 @@
 import CoreLocation
-import CoreGraphics
+import UIKit
 import WhimRandom
 import WhimCore
 
