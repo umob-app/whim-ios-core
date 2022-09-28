@@ -32,7 +32,11 @@ let package = Package(
                 .product(name: "WhimRandom", package: "whim-ios-random"),
                 .product(name: "RxCocoa", package: "RxSwift"),
                 "RxSwift",
-            ]),
+            ],
+            resources: [
+                .process("Resources")
+            ]
+        ),
         .testTarget(
             name: "WhimCoreTests",
             dependencies: [
