@@ -255,7 +255,7 @@ extension HomeSceneAnimatedTransitions {
             let mode = self.mode
 
             to.viewControllers.map(\.view).forEach(container.addSubview)
-            _ = finalPositionConstraints(for: to, in: container).activate()
+            let toConstraints = finalPositionConstraints(for: to, in: container).activate()
             container.layoutIfNeeded()
 
             switch mode {

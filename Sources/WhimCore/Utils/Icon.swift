@@ -4,7 +4,7 @@ import WhimUtils
 import SDWebImage
 
 // sourcery: Random
-public enum Icon: Hashable {
+public enum Icon: Hashable, Equatable {
     // sourcery: Random
     public enum Placeholder: Hashable {
         case image(UIImage)

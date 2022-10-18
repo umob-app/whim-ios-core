@@ -52,6 +52,6 @@ public extension Reactive where Base: UIViewController {
     var isActive: Observable<Bool> {
         Observable
             .merge(viewWillAppear.map { _ in true }, viewWillDisappear.map { _ in false })
-            .observe(on:MainScheduler.asyncInstance)
+            .observe(on: MainScheduler.asyncInstance)
     }
 }

@@ -17,8 +17,8 @@ public extension SceneStore {
         let transform = (state: fullscreen.state, action: fullscreen.action)
 
         _ = Observable.combineLatest(fullscreen.presentation.rx.viewDidLoad, self.state) { _, state in state }
-            .observe(on:MainScheduler.instance)
-            .take(until:fullscreen.presentation.rx.deallocated)
+            .observe(on: MainScheduler.instance)
+            .take(until: fullscreen.presentation.rx.deallocated)
             .subscribe(onNext: { [weak fullscreen = fullscreen.presentation] in
                 if let state = transform.state($0) {
                     fullscreen?.render(state: state)
@@ -26,8 +26,8 @@ public extension SceneStore {
             })
 
         _ = routes
-            .observe(on:MainScheduler.instance)
-            .take(until:fullscreen.presentation.rx.deallocated)
+            .observe(on: MainScheduler.instance)
+            .take(until: fullscreen.presentation.rx.deallocated)
             .subscribe(onNext: router)
 
         fullscreen.presentation.output = {
@@ -60,8 +60,8 @@ public extension SceneStore {
         let sceneDeallocated = Observable.combineLatest(top.presentation.rx.deallocated, bottom.presentation.rx.deallocated)
 
         _ = Observable.combineLatest(top.presentation.rx.viewDidLoad, bottom.presentation.rx.viewDidLoad, state) { _, _, s in s }
-            .observe(on:MainScheduler.instance)
-            .take(until:sceneDeallocated)
+            .observe(on: MainScheduler.instance)
+            .take(until: sceneDeallocated)
             .subscribe(onNext: { [weak top = top.presentation, weak bottom = bottom.presentation] in
                 if let topState = transformTop.state($0) {
                     top?.render(state: topState)
@@ -76,8 +76,8 @@ public extension SceneStore {
             })
 
         _ = routes
-            .observe(on:MainScheduler.instance)
-            .take(until:sceneDeallocated)
+            .observe(on: MainScheduler.instance)
+            .take(until: sceneDeallocated)
             .subscribe(onNext: router)
 
         // capturing store here by top and bottom view-controllers

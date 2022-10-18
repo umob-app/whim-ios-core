@@ -43,7 +43,7 @@ internal class AppleMapsAnnotation<T: AppleMapsAnnotationData>: NSObject, MKAnno
             // skipping first update, as we've already set coordinate in `init`
             .skip(1)
             .distinctUntilChanged()
-            .observe(on:MainScheduler.asyncInstance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] newCoordinate in
                 if let animation = newCoordinate.animation {
                     UIView.animate(
@@ -152,7 +152,7 @@ internal class AppleMapsAnnotationView<T: AppleMapsAnnotationData>: MKAnnotation
         }
         marker.observableContent.asObservable()
             .distinctUntilChanged()
-            .observe(on:MainScheduler.asyncInstance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] newContent in self?.applyNewMarkerContent(newContent) })
             .disposed(by: disposeBag)
     }
@@ -210,7 +210,7 @@ internal class AppleMapsAnnotationView<T: AppleMapsAnnotationData>: MKAnnotation
         }
         marker.observableAlpha.asObservable()
             .distinctUntilChanged()
-            .observe(on:MainScheduler.asyncInstance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] newAlpha in self?.applyNewMarkerAlpha(newAlpha) })
             .disposed(by: disposeBag)
     }

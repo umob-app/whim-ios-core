@@ -163,7 +163,7 @@ extension Feedback {
             // NOTE: `observeOn(_:)` should be applied on the inner observable, so
             //       that cancellation due to state changes would be able to
             //       cancel outstanding events that have already been scheduled.
-            transform(input).flatMapLatest { effects($0).observe(on:scheduler) }
+            transform(input).flatMapLatest { effects($0).observe(on: scheduler) }
         }
     }
 }
@@ -206,7 +206,7 @@ extension Feedback {
             // NOTE: `observeOn(_:)` should be applied on the inner observable, so
             //       that cancellation due to state changes would be able to
             //       cancel outstanding events that have already been scheduled.
-            transform(input).flatMap { effects($0).observe(on:scheduler) }
+            transform(input).flatMap { effects($0).observe(on: scheduler) }
         }
     }
 }
@@ -398,9 +398,9 @@ public extension Feedback {
     static func imperative(effects: @escaping (@escaping (Event) -> Void) -> (State, Event) -> Void) -> Feedback {
         Feedback(events: { scheduler, input in
             Observable.create { observer in
-                input.compactMap(WhimCore.zip).subscribe(onNext: effects({ event in observer.on(.next(event)) }))
+                input.compactMap(zip).subscribe(onNext: effects({ event in observer.on(.next(event)) }))
             }
-            .observe(on:scheduler)
+            .observe(on: scheduler)
         })
     }
 }
@@ -413,7 +413,7 @@ public extension Feedback {
     /// - parameter effects: The side effect yielding events that eventually affect the state.
     static func just(effects: Effect) -> Feedback {
         Feedback(events: { scheduler, _ in
-            effects.observe(on:scheduler)
+            effects.observe(on: scheduler)
         })
     }
 
@@ -478,7 +478,7 @@ public final class FeedbackSystem<State, Event>: ObservableConvertibleType {
             return Observable<Event>.merge(outputs)
                 // This is protection from accidental ignoring of scheduler so
                 // reentracy errors can be avoided
-                .observe(on:CurrentThreadScheduler.instance)
+                .observe(on: CurrentThreadScheduler.instance)
                 .scan(into: (initial, nil), accumulator: { (acc: inout Input, event: Event) in
                     reduce(&acc.state, event)
                     acc.event = event
@@ -489,13 +489,13 @@ public final class FeedbackSystem<State, Event>: ObservableConvertibleType {
                 }, onSubscribed: {
                     state.onNext(initial)
                 })
-                .subscribe(on:scheduler)
-                .observe(on:scheduler)
+                .subscribe(on: scheduler)
+                .observe(on: scheduler)
         }
-        .observe(on:scheduler)
+        .observe(on: scheduler)
         .bind(onNext: { [weak self] output in
             stateRelay.accept(output.state)
-            WhimCore.zip(self?.eventsRelay, output.event).map { $0.accept($1) }
+            zip(self?.eventsRelay, output.event).map { $0.accept($1) }
         })
         .disposed(by: disposeBag)
     }

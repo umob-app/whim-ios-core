@@ -497,10 +497,7 @@ public final class BottomPanelHandler: ObservableConvertibleType {
     }
 
     private func makeBottomPanelPoint(_ bottomPanelInitialStickyPoint: BottomPanelStickyPoint) -> BottomPanelPoint? {
-        guard bottomPanel != nil else {
-            return nil
-        }
-        
+        guard let bottomPanel = bottomPanel else { return nil }
         let relative = bottomPanelInitialStickyPoint.point(inArea: availableArea)
         return BottomPanelPoint(
             sticky: bottomPanelInitialStickyPoint,
