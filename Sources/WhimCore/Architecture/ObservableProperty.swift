@@ -23,7 +23,7 @@ public final class ObservableProperty<Element>: ObservableConvertibleType {
 
     public func asObservable() -> Observable<Element> {
         let observable = _value.asObservable()
-        return scheduler.map(observable.observe(on:)) ?? observable
+        return scheduler.map(observable.observeOn) ?? observable
     }
 }
 

@@ -534,7 +534,7 @@ public final class AppleMapsViewController<Context>: UIViewController, MapLayerM
 
         sidebar.reversed().forEach { sidebarItem in
             let button = MapSidebarItemButton(item: sidebarItem)
-            _ = button.rx.tap.take(until:button.rx.deallocated).bind { [weak self] in
+            _ = button.rx.tap.take(until: button.rx.deallocated).bind { [weak self] in
                 guard let self = self else { return }
                 // might seem a bit hacky:
                 // in case we don't have real active layer (the one with the token),

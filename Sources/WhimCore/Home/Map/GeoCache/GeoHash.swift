@@ -56,7 +56,7 @@ public enum GeoHash {
         .west:  [.even: Array("238967debc01fg45kmstqrwxuvhjyznp"), .odd: Array("14365h7k9dcfesgujnmqp0r2twvyx8zb")]
     ]
     private static let neighborsDecodeTable = neighborsEncodeTable.compactMapValues { neigborsPerParity in
-        WhimCore.zip(neigborsPerParity[.even], neigborsPerParity[.odd]).map { even, odd in
+        zip(neigborsPerParity[.even], neigborsPerParity[.odd]).map { even, odd in
             [Parity.even: even.charAtIdxTable, .odd: odd.charAtIdxTable]
         }
     }
@@ -69,7 +69,7 @@ public enum GeoHash {
         .west:  [.even: Array("0145hjnp"), .odd: Array("028b")]
     ]
     private static let bordersDecodeTable = bordersEncodeTable.compactMapValues { neigborsPerParity in
-        WhimCore.zip(neigborsPerParity[.even], neigborsPerParity[.odd]).map { even, odd in
+        zip(neigborsPerParity[.even], neigborsPerParity[.odd]).map { even, odd in
             [Parity.even: even.charAtIdxTable, .odd: odd.charAtIdxTable]
         }
     }
@@ -304,7 +304,7 @@ extension GeoHash {
             parent = parent.flatMap { adjacent(geohash: $0, direction: direction) }
         }
         // append adjacent character by its position in original alphabet
-        return WhimCore.zip(parent, neighborsDecodeTable[direction]?[parity]?[lastChar].map { base32EncodeTable[$0] })
+        return zip(parent, neighborsDecodeTable[direction]?[parity]?[lastChar].map { base32EncodeTable[$0] })
             .map { parent, adjacentChar in
                 var parent = parent
                 parent.append(adjacentChar)

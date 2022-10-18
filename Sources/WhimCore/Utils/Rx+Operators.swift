@@ -31,7 +31,7 @@ public extension ObservableType {
             .scan(into: (seed, seed), accumulator: { acc, value in
                 acc = (acc.1, value)
             })
-            .skip(1)            
+            .skip(1)
             .compactMap(WhimCore.zip)
     }
 }

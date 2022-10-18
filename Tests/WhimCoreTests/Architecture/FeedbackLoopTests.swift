@@ -221,7 +221,7 @@ class FeedbackLoopSystemTests: XCTestCase {
         let result = try! sut.asObservable()
             // 50 milliseconds should be enough to prove that external event didn't pass through,
             // though it might need some adjustment for slower CI machine such as travis or jenkins
-            .take(for: .milliseconds(50), scheduler: MainScheduler.instance)
+            .take(.milliseconds(50), scheduler: MainScheduler.instance)
             .toBlocking(timeout: 5.0)
             .toArray()
 
@@ -273,7 +273,7 @@ class FeedbackLoopSystemTests: XCTestCase {
                 },
                 feedbacks: [
                     Feedback { scheduler, input in
-                        input.take(1).map { _ in "event" }.observe(on: scheduler)
+                        input.take(1).map { _ in "event" }.observeOn(scheduler)
                         // `onCompleted` is called before subscriber gets next state, and expectation is fulfilled prematurely.
                         // Thus fulfilling expectation right in-place, where new state is appended in subscription block.
                         //
@@ -404,7 +404,7 @@ class FeedbackLoopSystemTests: XCTestCase {
                         state.take(1).map { _ in 2 },
                         state.skip(1).take(3).map { $0 + 1000 }
                     )
-                    .observe(on: scheduler)
+                    .observeOn(scheduler)
                 }
             ]
         )
@@ -443,7 +443,7 @@ class FeedbackLoopSystemTests: XCTestCase {
                         state.take(1).map { _ in 2 },
                         state.take(3).map { $0 + 1000 }
                     )
-                    .observe(on: scheduler)
+                    .observeOn(scheduler)
                 }
             ]
         )
@@ -543,7 +543,7 @@ class FeedbackLoopSystemTests: XCTestCase {
                     input.do(onNext: {
                         recordedInputs.append($0)
                     }).flatMapLatest { _ in
-                        Observable.empty().observe(on: scheduler)
+                        Observable.empty().observeOn(scheduler)
                     }
                 }
             ]
