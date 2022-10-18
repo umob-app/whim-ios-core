@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.dependency 'WhimUtils'
 
   s.test_spec 'Tests' do |ts|
-    ts.source_files = 'WhimCore/Tests/**/*'
+    ts.source_files = 'Tests/WhimCoreTests/**/*'
     
     ts.dependency 'Quick', '~> 3'
     ts.dependency 'Nimble', '~> 9'
