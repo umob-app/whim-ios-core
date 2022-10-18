@@ -398,7 +398,7 @@ public extension Feedback {
     static func imperative(effects: @escaping (@escaping (Event) -> Void) -> (State, Event) -> Void) -> Feedback {
         Feedback(events: { scheduler, input in
             Observable.create { observer in
-                input.compactMap(zip).subscribe(onNext: effects({ event in observer.on(.next(event)) }))
+                input.compactMap(WhimCore.zip).subscribe(onNext: effects({ event in observer.on(.next(event)) }))
             }
             .observe(on: scheduler)
         })
@@ -495,7 +495,7 @@ public final class FeedbackSystem<State, Event>: ObservableConvertibleType {
         .observe(on: scheduler)
         .bind(onNext: { [weak self] output in
             stateRelay.accept(output.state)
-            zip(self?.eventsRelay, output.event).map { $0.accept($1) }
+            WhimCore.zip(self?.eventsRelay, output.event).map { $0.accept($1) }
         })
         .disposed(by: disposeBag)
     }
