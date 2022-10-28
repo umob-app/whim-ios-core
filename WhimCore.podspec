@@ -25,10 +25,10 @@ Pod::Spec.new do |s|
   s.test_spec 'Tests' do |ts|
     ts.source_files = 'Tests/WhimCoreTests/**/*'
     
-    ts.dependency 'Quick', '~> 3'
-    ts.dependency 'Nimble', '~> 9'
-    ts.dependency 'RxTest', '~> 6'
-    ts.dependency 'RxBlocking', '~> 6'
+    ts.dependency 'Quick', '5.0.1'
+    ts.dependency 'Nimble', '9.2.1'
+    ts.dependency 'RxTest', '6.5.0'
+    ts.dependency 'RxBlocking', '6.5.0'
     ts.dependency 'SwiftyMock', '0.2.3'
     ts.dependency 'WhimRandom'
 

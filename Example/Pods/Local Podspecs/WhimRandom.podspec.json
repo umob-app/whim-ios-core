@@ -1,0 +1,42 @@
+{
+  "name": "WhimRandom",
+  "version": "0.1.0",
+  "summary": "Lightweight Random Utils for Testing 🎲",
+  "description": "Seedable Xoroshiro random generator • Random extensions for Swift standard types • Sourcery templates for autogenerating Random for custom types",
+  "homepage": "https://gist.github.com/a-voronov/12fcc2139fa2d14e31b256b57ef83f27",
+  "license": {
+    "type": "UNLICENSED"
+  },
+  "authors": {
+    "MaaS Global": "tech@maas.fi"
+  },
+  "source": {
+    "git": "https://github.com/maasglobal/whim-ios-random.git",
+    "tag": "wr-0.1.0"
+  },
+  "platforms": {
+    "ios": "14.0"
+  },
+  "default_subspecs": "Core",
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "Sources/WhimRandom/**/*.{swift,stencil}",
+      "resource_bundles": {
+        "Resources": [
+          "Sources/Resources/**/*.json",
+          "Sources/Resources/**/*.yml"
+        ]
+      }
+    },
+    {
+      "name": "Templates",
+      "dependencies": {
+        "Core": [
+
+        ]
+      },
+      "resources": "Sources/WhimRandom/Templates/**/*.{stencil}"
+    }
+  ]
+}

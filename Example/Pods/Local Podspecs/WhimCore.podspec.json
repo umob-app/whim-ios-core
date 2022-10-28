@@ -1,0 +1,79 @@
+{
+  "name": "WhimCore",
+  "version": "0.1.0",
+  "summary": "Whim 2 Core Utils.",
+  "swift_versions": "5.2",
+  "homepage": "https://github.com/maasglobal/whim-ios",
+  "license": {
+    "type": "UNLICENSED"
+  },
+  "authors": {
+    "MaaS Global": "tech@maas.fi"
+  },
+  "source": {
+    "git": "https://github.com/maasglobal/whim-ios-core.git",
+    "tag": "wc-0.1.0"
+  },
+  "platforms": {
+    "ios": "14.0"
+  },
+  "source_files": "Sources/WhimCore/**/*.swift",
+  "resource_bundles": {
+    "WhimCoreResources": [
+      "Sources/WhimCore/**/*.xib",
+      "Sources/WhimCore/Resources/*.xcassets"
+    ]
+  },
+  "frameworks": [
+    "UIKit",
+    "MapKit"
+  ],
+  "dependencies": {
+    "RxSwift": [
+      "~> 6"
+    ],
+    "RxCocoa": [
+      "~> 6"
+    ],
+    "SDWebImage": [
+      "5.13.4"
+    ],
+    "WhimUtils": [
+
+    ]
+  },
+  "testspecs": [
+    {
+      "name": "Tests",
+      "test_type": "unit",
+      "source_files": "Tests/WhimCoreTests/**/*",
+      "dependencies": {
+        "Quick": [
+          "5.0.1"
+        ],
+        "Nimble": [
+          "9.2.1"
+        ],
+        "RxTest": [
+          "6.5.0"
+        ],
+        "RxBlocking": [
+          "6.5.0"
+        ],
+        "SwiftyMock": [
+          "0.2.3"
+        ],
+        "WhimRandom": [
+
+        ]
+      },
+      "info_plist": {
+        "NSPrincipalClass": "WhimCore_Unit_Tests.RandomSeed"
+      },
+      "scheme": {
+        "code_coverage": true
+      }
+    }
+  ],
+  "swift_version": "5.2"
+}
