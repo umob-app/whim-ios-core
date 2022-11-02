@@ -8,4 +8,4 @@ DerivedData/
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
 
-WhimCoreExample/Pods/
+Example/Pods/
