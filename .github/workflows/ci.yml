@@ -24,17 +24,13 @@ jobs:
         
       - name: Update cocoapods
         run: |    
-          gem pristine --all
           gem install bundler
           bundle install 
-      
-      - name: Update cocoapods 2
-        run: |                    
           cd Example && bundle exec pod install --repo-update
-
+      
       - name: Running tests
         run: |                    
-          set -o pipefail && xcodebuild -workspace WhimNetworkExample/WhimNetworkExample.xcworkspace -scheme WhimNetworkExample -derivedDataPath Build/ -enableCodeCoverage YES -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' build test | xcbeautify
+          set -o pipefail && xcodebuild -workspace Example/WhimCore.xcworkspace -scheme WhimCore-Example -derivedDataPath Build/ -enableCodeCoverage YES -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' build test | xcbeautify
 
       - name: Format coverage files with slather
         run: |
