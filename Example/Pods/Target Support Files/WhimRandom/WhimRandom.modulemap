@@ -1,6 +1,0 @@
-framework module WhimRandom {
-  umbrella header "WhimRandom-umbrella.h"
-
-  export *
-  module * { export * }
-}
