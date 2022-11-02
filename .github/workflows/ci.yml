@@ -25,7 +25,10 @@ jobs:
       - name: Update cocoapods
         run: |    
           gem install bundler
-          bundle install           
+          bundle install 
+      
+      - name: Update cocoapods 2
+        run: |                    
           cd Example && bundle exec pod install --repo-update
 
       - name: Running tests
