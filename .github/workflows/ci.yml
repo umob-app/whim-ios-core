@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
 
 jobs:
   ci:
@@ -30,7 +33,9 @@ jobs:
       
       - name: Running tests
         run: |                    
-          set -o pipefail && xcodebuild -workspace Example/WhimCore.xcworkspace -scheme WhimCore-Example -derivedDataPath Build/ -enableCodeCoverage YES -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' build test | xcbeautify
+          set -o pipefail 
+          xcodebuild -workspace Example/WhimCore.xcworkspace -scheme WhimCore-Example -derivedDataPath Build/ -enableCodeCoverage YES -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' build test 
+          xcbeautify
 
       - name: Format coverage files with slather
         run: |
