@@ -7,7 +7,7 @@ on:
 
 jobs:
   ci:
-    name: Testing network framework
+    name: Testing Core framework
     runs-on: [self-hosted, macOS, X64]    
     timeout-minutes: 12 
     
