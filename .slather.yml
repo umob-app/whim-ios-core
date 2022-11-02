@@ -6,4 +6,4 @@ output_directory: ./Build
 build_directory: ./Build
 binary-file: ../../Library/Developer/Xcode/DeliveredData
 ignore: 
- - Example/Pods/*
+ - Example/*
