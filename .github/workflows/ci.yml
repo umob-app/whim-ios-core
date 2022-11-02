@@ -24,6 +24,7 @@ jobs:
         
       - name: Update cocoapods
         run: |    
+          gem pristine --all
           gem install bundler
           bundle install 
       
