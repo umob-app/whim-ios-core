@@ -1,6 +1,0 @@
-framework module WhimCore {
-  umbrella header "WhimCore-umbrella.h"
-
-  export *
-  module * { export * }
-}

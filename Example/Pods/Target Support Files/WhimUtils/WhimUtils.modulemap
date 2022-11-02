@@ -1,6 +1,0 @@
-framework module WhimUtils {
-  umbrella header "WhimUtils-umbrella.h"
-
-  export *
-  module * { export * }
-}
