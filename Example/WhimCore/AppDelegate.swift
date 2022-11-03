@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let reload = MapReloadSidebarItemView(style: .normal)
         map.sidebar = [.trackUser, .reload(reload)]
         map.events.compactMap(\.map?.didTapSidebarItem?.reload)
-            .observeOn(MainScheduler.asyncInstance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { item in
                 item.style = item.style == .normal ? .spinning : .normal
             })
@@ -159,7 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                })
             })
         )
-        .observeOn(MainScheduler.asyncInstance)
+        .observe(on: MainScheduler.asyncInstance)
         .subscribe(onNext: { args, _ in
             guard reload.style != .spinning else {
                 return
