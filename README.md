@@ -1,4 +1,5 @@
 # WhimCore
+[![codecov](https://codecov.io/gh/maasglobal/whim-ios-core/branch/main/graph/badge.svg?token=9nsaxD0896)](https://codecov.io/gh/maasglobal/whim-ios-core)
 
 Collection of Core utils for Whim 2.
 
