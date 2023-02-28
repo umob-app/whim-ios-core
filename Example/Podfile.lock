@@ -80,10 +80,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   WhimRandom:
-    :commit: f487575119898e956c08d8d10936f82034e590de
+    :commit: 5a230471af43abf08758fc1a93da0e3e37c79f72
     :git: https://github.com/maasglobal/whim-ios-random
   WhimUtils:
-    :commit: 6c99b684cf108168972f35f1113cf2b28e86f9eb
+    :commit: c4815771d649886d87d041327f44dbcf06d3af8e
     :git: https://github.com/maasglobal/whim-ios-utils
 
 SPEC CHECKSUMS:
