@@ -31,7 +31,7 @@ jobs:
         run: |    
           gem install bundler
           bundle install 
-          cd Example && bundle exec pod install --repo-update
+          cd Example && bundle exec pod install
       
       - name: Running tests
         run: |                    
