@@ -355,8 +355,8 @@ extension MapSidebarItem {
         }
     }
 
-    public static var reload: MapSidebarItem {
-        return .reload(MapReloadSidebarItemView(style: .normal))
+    public static func reload(highlightColor: UIColor, normalTintColor: UIColor) -> MapSidebarItem {
+        return .reload(MapReloadSidebarItemView(style: .normal, highlightColor: highlightColor, normalTintColor: normalTintColor))
     }
 
     public static func custom(id: String, image: UIImage, tintColor: UIColor? = nil) -> MapSidebarItem {
