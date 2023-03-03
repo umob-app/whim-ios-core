@@ -121,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        map.setCenter(.init(latitude: 60.165791, longitude: 24.941906), zoomLevel: 18, animated: true)
         map.events.subscribe(onNext: { e in print("🗺: \(e)") }).disposed(by: disposeBag)
 
-        let reload = MapReloadSidebarItemView(style: .normal)
+        let reload = MapReloadSidebarItemView(style: .normal, highlightColor: .red, normalTintColor: .green)
         
         let trackUserHighlight: MapSidebarItem.Custom = .init(id: "trackUserHighlighted", content: MapSidebarItem.Content.image(UIImage(named: "map-icon-location-filled")!.withRenderingMode(.alwaysTemplate), tintColor: .red))
 

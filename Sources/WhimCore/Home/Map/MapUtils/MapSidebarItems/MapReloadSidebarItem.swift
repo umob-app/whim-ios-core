@@ -3,8 +3,6 @@ import UIKit
 /// Represents a reloading icon image-view.
 /// Has `style` variable, changing which will render correct state.
 public final class MapReloadSidebarItemView: UIImageView {
-    private static let highlightColor = UIColor(red: 3 / 255, green: 153 / 255, blue: 253 / 255, alpha: 1)
-
     private static var icon: UIImage? {
         return WhimCore.image(named: "map-reload-icon")
     }
@@ -22,8 +20,13 @@ public final class MapReloadSidebarItemView: UIImageView {
         }
     }
 
-    public init(style: Style = .normal) {
+    private var highlightColor: UIColor
+    private var normalTintColor: UIColor
+
+    public init(style: Style = .normal, highlightColor: UIColor, normalTintColor: UIColor) {
         self.style = style
+        self.highlightColor = highlightColor
+        self.normalTintColor = normalTintColor
         super.init(frame: .zero)
         contentMode = .center
 
@@ -42,13 +45,13 @@ public final class MapReloadSidebarItemView: UIImageView {
 
         switch style {
         case .normal:
-            image = Self.icon?.withRenderingMode(.alwaysOriginal)
-            tintColor = .clear
+            image = Self.icon?.withRenderingMode(.alwaysTemplate)
+            tintColor = normalTintColor
             backgroundColor = .white
         case .highlighted:
             image = Self.icon?.withRenderingMode(.alwaysTemplate)
             tintColor = .white
-            backgroundColor = Self.highlightColor
+            backgroundColor = highlightColor
         case .spinning:
             let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
             rotation.toValue = NSNumber(value: Double.pi * 2)
@@ -60,7 +63,7 @@ public final class MapReloadSidebarItemView: UIImageView {
 
             image = Self.icon?.withRenderingMode(.alwaysTemplate)
             tintColor = .white
-            backgroundColor = Self.highlightColor
+            backgroundColor = highlightColor
         }
     }
 }
