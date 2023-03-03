@@ -31,7 +31,10 @@ final public class MapSidebarItemButton: UIButton {
 
     public func updateContent(isHighlighted: Bool = false) {
         switch item.content(isHighlighted: isHighlighted) {
-        case let .image(image):
+        case let .image(image, tintColor):
+            if let tintColor = tintColor {
+                self.tintColor = tintColor
+            }
             setImage(image, for: .normal)
         case let .view(view):
             addCustomView(view)
