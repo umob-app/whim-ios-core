@@ -1014,7 +1014,7 @@ public final class AppleMapsViewController<Context>: UIViewController, MapLayerM
         applyState(MapLayerState(
             configs: MapConfig.allWithoutMapDetails,
             visibleRectInset: currentLayer.visibleRectInset,
-            sidebar: [.trackUser],
+            sidebar: [.trackUser(highlightedContent: nil, normalContent: nil)],
             markers: [],
             overlays: [],
             markerSelection: nil,

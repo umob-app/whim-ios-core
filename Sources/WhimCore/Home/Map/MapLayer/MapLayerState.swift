@@ -28,7 +28,7 @@ struct MapLayerState: Equatable {
     static let `default` = MapLayerState(
         configs: MapConfig.allWithoutMapDetails,
         visibleRectInset: .automatic(),
-        sidebar: [.trackUser],
+        sidebar: [.trackUser(highlightedContent: nil, normalContent: nil)],
         centerPin: nil,
         markers: [],
         overlays: [],
@@ -247,10 +247,10 @@ public extension MapLayerVisibleRectInset {
 public typealias MapSidebar = [MapSidebarItem]
 
 public enum MapSidebarItem: Hashable {
-    case trackUser
+    case trackUser(highlightedContent: Custom?, normalContent: Custom?)
     case reload(MapReloadSidebarItemView)
     case custom(Custom)
-    case filter(Bool)
+    case filter(highlightedContent: Custom?, normalContent: Custom?, isHighlighted: Bool)
 
     // sourcery: Random
     public struct Custom: Hashable {
@@ -267,11 +267,11 @@ public enum MapSidebarItem: Hashable {
 
     // sourcery: Random
     public enum Content: Hashable {
-        case image(UIImage)
+        case image(UIImage, tintColor: UIColor?)
         case view(UIView)
 
         public var image: UIImage? {
-            guard case let .image(value) = self else { return nil }
+            guard case let .image(value, _) = self else { return nil }
             return value
         }
 
@@ -314,28 +314,44 @@ extension MapSidebarItem {
     }
 
     public var filter: Bool? {
-        guard case let .filter(item) = self else { return nil }
-        return item
+        guard case let .filter(_, _, isFiltered) = self else { return nil }
+        return isFiltered
     }
 
     public func content(isHighlighted: Bool = false) -> Content {
         switch self {
-        case .trackUser:
-            return .image(
-                isHighlighted
-                ? WhimCore.image(named: "map-icon-location-filled")!
-                : WhimCore.image(named: "map-icon-location")!
-            )
-        case let .reload(reload):
-            return .view(reload)
-        case let .custom(custom):
-            return custom.content
-        case let .filter(isHighlighted):
-            return .image(
-                isHighlighted
-                ? WhimCore.image(named: "map-icon-filter-filled")!
-                : WhimCore.image(named: "map-icon-filter")!
-            )
+            case let .trackUser(highlightedContent, normalContent):
+                if isHighlighted {
+                    if let highlightedContent = highlightedContent {
+                        return highlightedContent.content
+                    }
+
+                    return .image(WhimCore.image(named: "map-icon-location-filled")!, tintColor: nil)
+                }
+
+                if let normalContent = normalContent {
+                    return normalContent.content
+                }
+
+                return .image(WhimCore.image(named: "map-icon-location")!, tintColor: nil)
+            case let .reload(reload):
+                return .view(reload)
+            case let .custom(custom):
+                return custom.content
+            case let .filter(highlightedContent, normalContent, isHighlighted):
+                if isHighlighted {
+                    if let highlightedContent = highlightedContent {
+                        return highlightedContent.content
+                    }
+
+                    return .image(WhimCore.image(named: "map-icon-filter-filled")!, tintColor: nil)
+                }
+
+                if let normalContent = normalContent {
+                    return normalContent.content
+                }
+
+                return .image(WhimCore.image(named: "map-icon-filter")!, tintColor: nil)
         }
     }
 
@@ -343,8 +359,8 @@ extension MapSidebarItem {
         return .reload(MapReloadSidebarItemView(style: .normal))
     }
 
-    public static func custom(id: String, image: UIImage) -> MapSidebarItem {
-        return .custom(.init(id: id, content: .image(image)))
+    public static func custom(id: String, image: UIImage, tintColor: UIColor? = nil) -> MapSidebarItem {
+        return .custom(.init(id: id, content: .image(image, tintColor: tintColor)))
     }
 
     public static func custom(id: String, view: UIView) -> MapSidebarItem {

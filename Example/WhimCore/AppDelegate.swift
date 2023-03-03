@@ -122,7 +122,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         map.events.subscribe(onNext: { e in print("🗺: \(e)") }).disposed(by: disposeBag)
 
         let reload = MapReloadSidebarItemView(style: .normal)
-        map.sidebar = [.trackUser, .reload(reload)]
+        
+        let trackUserHighlight: MapSidebarItem.Custom = .init(id: "trackUserHighlighted", content: MapSidebarItem.Content.image(UIImage(named: "map-icon-location-filled")!.withRenderingMode(.alwaysTemplate), tintColor: .red))
+
+        let trackUserNormal: MapSidebarItem.Custom = .init(id: "trackUserNormal", content: MapSidebarItem.Content.image(UIImage(named: "map-icon-location")!.withRenderingMode(.alwaysTemplate), tintColor: .green))
+
+        map.sidebar = [.trackUser(highlightedContent: trackUserHighlight, normalContent: trackUserNormal), .reload(reload)]
         map.events.compactMap(\.map?.didTapSidebarItem?.reload)
             .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { item in
