@@ -619,14 +619,14 @@ extension MapRoutePlan.TransportType: Random {
 extension MapSidebarItem.Content: RandomAll {
     public static func allRandom<G: RandomNumberGenerator>(using generator: inout G) -> [MapSidebarItem.Content] {
         return [
-            .image(.random(using: &generator)),
+            .image(.random(using: &generator), tintColor: nil),
             .view(.random(using: &generator))
         ]
     }
 
 
     static func random(
-        image: MapSidebarItem.Content = .image(.random(using: &R)),
+        image: MapSidebarItem.Content = .image(.random(using: &R), tintColor: nil),
         view: MapSidebarItem.Content = .view(.random(using: &R))
     ) -> MapSidebarItem.Content {
         return [
