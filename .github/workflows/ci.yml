@@ -9,7 +9,8 @@ on:
       - main
 env:
   GITHUB_TOKEN: ${{ secrets.IOS_GITHUB_TOKEN }}
-  
+  SIM_CONFIG: ${{ vars.IOS_BUILDBOX_SIMULATOR_CONFIG }}
+
 jobs:
   ci:
     name: Testing Core framework
@@ -36,7 +37,7 @@ jobs:
       - name: Running tests
         run: |                    
           set -o pipefail 
-          xcodebuild -workspace Example/WhimCore.xcworkspace -scheme WhimCore-Example -derivedDataPath Build/ -enableCodeCoverage YES -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' build test 
+          xcodebuild -workspace Example/WhimCore.xcworkspace -scheme WhimCore-Example -derivedDataPath Build/ -enableCodeCoverage YES -sdk iphonesimulator -destination ${{env.SIM_CONFIG}} build test 
           xcbeautify
 
       - name: Format coverage files with slather
