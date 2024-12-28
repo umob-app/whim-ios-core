@@ -20,7 +20,6 @@ Pod::Spec.new do |s|
   s.dependency 'RxSwift', '~> 6'
   s.dependency 'RxCocoa', '~> 6'
   s.dependency 'SDWebImage', '5.13.4' # MIT
-  s.dependency 'WhimUtils'
 
   s.test_spec 'Tests' do |ts|
     ts.source_files = 'Tests/WhimCoreTests/**/*'

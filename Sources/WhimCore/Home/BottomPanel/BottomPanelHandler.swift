@@ -1,7 +1,6 @@
 import UIKit
 import RxSwift
 import RxRelay
-import WhimUtils
 
 /// Core mechanics is taken from [PullUpController](https://github.com/MarioIannotta/PullUpController) and adapted to our needs.
 ///

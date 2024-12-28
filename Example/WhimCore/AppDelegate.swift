@@ -2,7 +2,6 @@ import UIKit
 import MapKit
 import CoreLocation
 import WhimCore
-import WhimUtils
 import RxSwift
 
 /* Some Tips:

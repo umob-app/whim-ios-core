@@ -1,5 +1,4 @@
 import UIKit
-import WhimUtils
 
 /// A button that is used to render map sidebar menu item with any given content.
 final public class MapSidebarItemButton: UIButton {

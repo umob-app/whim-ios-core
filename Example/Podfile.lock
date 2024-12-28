@@ -1,8 +1,5 @@
 PODS:
   - Nimble (9.2.1)
-  - ObjcExceptionBridging (1.0.1):
-    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
-  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - Quick (5.0.1)
   - RxBlocking (6.5.0):
     - RxSwift (= 6.5.0)
@@ -17,7 +14,6 @@ PODS:
   - SDWebImage (5.13.4):
     - SDWebImage/Core (= 5.13.4)
   - SDWebImage/Core (5.13.4)
-  - SwiftDate (6.1.0)
   - SwiftyMock (0.2.3):
     - SwiftyMock/Core (= 0.2.3)
   - SwiftyMock/Core (0.2.3)
@@ -25,7 +21,6 @@ PODS:
     - RxCocoa (~> 6)
     - RxSwift (~> 6)
     - SDWebImage (= 5.13.4)
-    - WhimUtils
   - WhimCore/Tests (0.1.0):
     - Nimble (= 9.2.1)
     - Quick (= 5.0.1)
@@ -36,29 +31,18 @@ PODS:
     - SDWebImage (= 5.13.4)
     - SwiftyMock (= 0.2.3)
     - WhimRandom
-    - WhimUtils
   - WhimRandom (0.1.0):
     - WhimRandom/Core (= 0.1.0)
   - WhimRandom/Core (0.1.0)
-  - WhimUtils (0.2.1):
-    - SDWebImage (= 5.13.4)
-    - SwiftDate (= 6.1.0)
-    - XCGLogger (= 7.0.1)
-  - XCGLogger (7.0.1):
-    - XCGLogger/Core (= 7.0.1)
-  - XCGLogger/Core (7.0.1):
-    - ObjcExceptionBridging
 
 DEPENDENCIES:
   - WhimCore (from `../`)
   - WhimCore/Tests (from `../`)
   - WhimRandom (from `https://github.com/maasglobal/whim-ios-random`)
-  - WhimUtils (from `https://github.com/maasglobal/whim-ios-utils`)
 
 SPEC REPOS:
   trunk:
     - Nimble
-    - ObjcExceptionBridging
     - Quick
     - RxBlocking
     - RxCocoa
@@ -66,29 +50,21 @@ SPEC REPOS:
     - RxSwift
     - RxTest
     - SDWebImage
-    - SwiftDate
     - SwiftyMock
-    - XCGLogger
 
 EXTERNAL SOURCES:
   WhimCore:
     :path: "../"
   WhimRandom:
     :git: https://github.com/maasglobal/whim-ios-random
-  WhimUtils:
-    :git: https://github.com/maasglobal/whim-ios-utils
 
 CHECKOUT OPTIONS:
   WhimRandom:
     :commit: 5a230471af43abf08758fc1a93da0e3e37c79f72
     :git: https://github.com/maasglobal/whim-ios-random
-  WhimUtils:
-    :commit: c4815771d649886d87d041327f44dbcf06d3af8e
-    :git: https://github.com/maasglobal/whim-ios-utils
 
 SPEC CHECKSUMS:
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
-  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Quick: 749aa754fd1e7d984f2000fe051e18a3a9809179
   RxBlocking: 04b5fd28bb5ea49f7d64b80db8bbfe50d9cc1c7d
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
@@ -96,13 +72,10 @@ SPEC CHECKSUMS:
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   RxTest: eb2d23adefc5a5ebf5779c7792fa3edfe6ebcc17
   SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
-  SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
   SwiftyMock: 26d649bbf320ede90196b40129552ef719863043
-  WhimCore: ca63eeec34fc24a7da325c5904d503ce18b3be30
-  WhimRandom: 69158b4a2e716233ea8027e75cf04fc62531bbfd
-  WhimUtils: 24bdd4b0c35deff2544e3b27eaa7e4b658d4d26a
-  XCGLogger: 1943831ef907df55108b0b18657953f868de973b
+  WhimCore: f263f2c3efe521177808e728d09196edf521ef17
+  WhimRandom: 4e6f9df3fe013c2073bb446785b64dce1288f7be
 
-PODFILE CHECKSUM: 770ddaca658ef1e37944848cd8a6d2103c8cfcbb
+PODFILE CHECKSUM: 25ce5efab2a7ad646b3d28e1ed44df4c82653a59
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.16.2
