@@ -5,7 +5,6 @@ platform :ios, '14.0'
 
 target 'WhimCore_Example' do
   pod 'WhimCore', :path => '../', :testspecs => ['Tests'], :inhibit_warnings => false
-  pod 'WhimUtils', :git => 'https://github.com/maasglobal/whim-ios-utils'
 
   # Testing
   pod 'WhimRandom', :git => 'https://github.com/maasglobal/whim-ios-random'

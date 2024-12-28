@@ -28,7 +28,6 @@ let package = Package(
         .target(
             name: "WhimCore",
             dependencies: [
-                .product(name: "WhimUtils", package: "whim-ios-utils"),
                 .product(name: "WhimRandom", package: "whim-ios-random"),
                 .product(name: "RxCocoa", package: "RxSwift"),
                 "RxSwift",

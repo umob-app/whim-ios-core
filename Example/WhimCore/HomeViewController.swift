@@ -2,7 +2,6 @@ import UIKit
 import RxSwift
 import RxRelay
 import WhimCore
-import WhimUtils
 
 public enum MaasHomeMap {
     case initial
