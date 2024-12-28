@@ -149,6 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Observable.combineLatest(
             map.events.compactMap(\.map?.changingPosition).filter(\.status.isEnded),
             map.events.compactMap(\.map?.didTapAnywhere).do(onNext: { [weak self] coord in
+                let coord = coord ?? CLLocationCoordinate2D()
                 self?.map.overlays.append(.circle(MapCircle(coordinate: coord, radius: radius, lineWidth: 2, fillColor: UIColor.red.withAlphaComponent(0.1))))
                 let now = Date()
                 cache.insert(items: (1...500).map { _ in .init(value: String.random(length: 3), coordinate: coord) }, aroundCoordinate: coord, inRadius: radius)
