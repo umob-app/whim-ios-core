@@ -997,7 +997,3 @@ You can even split it into separate `when` or `then` calls. It might be handy in
   * [Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226)
   * [Integrating SwiftUI](https://developer.apple.com/videos/play/wwdc2019/231)
   * Pointfree episodes [65-79](https://www.pointfree.co/episodes/)
-
-## Author
-
-MaaS Global, tech@maas.fi
