@@ -21,9 +21,18 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 Example project is intended to be used in order to speed up UI components development, 
 because main project takes ~70-80sec to recompile after every minor change.
 There's everything that might be potentially needed to test your code independently from the main project. 
-It also includes `WhimUtils` dependency for any shared utilities.
 After you're done, move your code into main project and bind it to business logic layer.
 You can test your code and create different scenarios right in `AppDelegate`.
+
+## Installation
+
+Setup Ruby environment and pod installation for example project.
+
+```sh
+cd Example
+bundle install
+bundle exec pod install
+```
 
 ## Playground
 
