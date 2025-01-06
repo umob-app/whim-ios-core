@@ -19,7 +19,7 @@ let package = Package(
         .package(url: "https://github.com/ReactiveX/RxSwift.git", exact: "6.5.0"),
         .package(url: "https://github.com/Quick/Quick.git", .upToNextMajor(from: "4.0.0")),
         .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "9.0.0")),
-        .package(url: "https://github.com/maasglobal/whim-ios-utils.git", branch: "main"),
+        .package(url: "https://github.com/SDWebImage/SDWebImage.git", exact: "5.13.4"),
         .package(url: "https://github.com/maasglobal/whim-ios-random.git", branch: "main"),
     ],
     targets: [
@@ -31,6 +31,7 @@ let package = Package(
                 .product(name: "WhimRandom", package: "whim-ios-random"),
                 .product(name: "RxCocoa", package: "RxSwift"),
                 "RxSwift",
+                "SDWebImage",
             ],
             resources: [
                 .process("Resources")

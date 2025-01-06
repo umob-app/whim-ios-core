@@ -50,17 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "3e48cb68d8e668d146dc59c73fb98cb628616236",
-        "version" : "5.13.2"
-      }
-    },
-    {
-      "identity" : "swiftdate",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/malcommac/SwiftDate.git",
-      "state" : {
-        "revision" : "700dde1b3417fd4a7fd2bec9f5bc8ab2de1b96b4",
-        "version" : "6.1.0"
+        "revision" : "9248fe561a2a153916fb9597e3af4434784c6d32",
+        "version" : "5.13.4"
       }
     },
     {
@@ -70,15 +61,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "4d677a50badee6084f0516076158d64f3c4efad8"
-      }
-    },
-    {
-      "identity" : "whim-ios-utils",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/maasglobal/whim-ios-utils.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "e9a00d1e491c6f4e05019cba1e2c91fa046e4179"
       }
     }
   ],
