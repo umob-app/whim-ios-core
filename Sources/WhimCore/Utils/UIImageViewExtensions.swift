@@ -1,7 +1,7 @@
 import UIKit
 import SDWebImage
 
-public extension UIImageView {
+extension UIImageView {
     private static var cacheSVG = [String: String]()
 
     func loadingAnimation() {

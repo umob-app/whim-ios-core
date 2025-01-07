@@ -1,9 +1,10 @@
-public extension String {
+extension String {
     var url: URL? {
         return URL(string: self)
     }
     
-    static func random(length: Int = 20) -> String {
+    // TODO: remove after Example/AppDelegate is cleaned
+    public static func random(length: Int = 20) -> String {
         let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var randomString: String = ""
         
