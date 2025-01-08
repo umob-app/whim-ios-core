@@ -1,4 +1,5 @@
 import CoreLocation
+import CoreGraphics
 import RxSwift
 import RxRelay
 
