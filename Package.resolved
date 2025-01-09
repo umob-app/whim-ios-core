@@ -55,6 +55,15 @@
       }
     },
     {
+      "identity" : "swiftymock",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stanfy/SwiftyMock.git",
+      "state" : {
+        "branch" : "spm",
+        "revision" : "913788f81e8ac4d4f8cc62cfd7da93902b1af2ae"
+      }
+    },
+    {
       "identity" : "whim-ios-random",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/maasglobal/whim-ios-random.git",
