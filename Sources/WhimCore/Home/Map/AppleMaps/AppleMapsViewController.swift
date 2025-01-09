@@ -524,7 +524,9 @@ public final class AppleMapsViewController<Context>: UIViewController, MapLayerM
         mapView.showsUserLocation = configs.contains(.showsUserLocation)
         mapView.showsBuildings = configs.contains(.isBuildingsEnabled)
         mapView.showsTraffic = configs.contains(.isTrafficEnabled)
-        mapView.showsPointsOfInterest = configs.contains(.isPOIsEnabled)
+        mapView.pointOfInterestFilter = configs.contains(.isPOIsEnabled)
+            ? .includingAll
+            : .excludingAll
     }
 
     private func applySidebar(_ sidebar: MapSidebar) {

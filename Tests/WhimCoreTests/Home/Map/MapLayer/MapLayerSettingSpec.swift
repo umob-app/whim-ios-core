@@ -5,6 +5,7 @@ import CoreLocation
 import RxSwift
 import RxRelay
 import SwiftyMock
+import UIKit
 import WhimRandom
 
 @testable import WhimCore

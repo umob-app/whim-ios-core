@@ -74,11 +74,6 @@ import RxRelay
 ///       each new value from the resulting stream will generate new side-effect and kill previous one if such is in progress.
 ///       it is treated as a baseline for other common transformations, but can be used on its own to achieve more specific results.
 ///
-///    - `merging(transform:effects:)`
-///       is used to transform either stream of state updates or emitted events into stream of other values,
-///       each new value from the resulting stream will generate new side-effect, and will not kill those that are already running
-///       unlike `withLatest`, if there're multiple effects alive, their events streams will be merged together in the system.
-///
 ///       - `lensing(transform:effects:)` or `extracting(transform:effects:)`
 ///          sorry for the name, it comes from FP and is common to other libraries, so I decide to keep it,
 ///          it transforms state into one of its parts if such exists or `nil` if state isn't in a needed shape,
@@ -104,6 +99,11 @@ import RxRelay
 ///          other values are ignored and original value's effect keeps on living,
 ///          however, once `nil` is received, any outstanding effect is killed.
 ///          same is for `whenBecomesTrue(predicate:effets:)`, except instead of value/nil there's true/false respectively.
+///
+///    - `merging(transform:effects:)`
+///       is used to transform either stream of state updates or emitted events into stream of other values,
+///       each new value from the resulting stream will generate new side-effect, and will not kill those that are already running
+///       unlike `withLatest`, if there're multiple effects alive, their events streams will be merged together in the system.
 ///
 ///    - `imperative(effects:)`:
 ///       can be used if reactive code is not preferred (i.e. hard to understand/maintain by the team),
