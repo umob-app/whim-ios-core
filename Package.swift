@@ -19,6 +19,7 @@ let package = Package(
         .package(url: "https://github.com/SDWebImage/SDWebImage.git", exact: "5.13.4"),
         .package(url: "https://github.com/stanfy/SwiftyMock.git", branch: "spm"),
         .package(url: "https://github.com/maasglobal/whim-ios-random.git", branch: "main"),
+        .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.1.0")),
     ],
     targets: [
         .target(
@@ -26,6 +27,7 @@ let package = Package(
             dependencies: [
                 .product(name: "WhimRandom", package: "whim-ios-random"),
                 .product(name: "RxCocoa", package: "RxSwift"),
+                .product(name: "OrderedCollections", package: "swift-collections"),
                 "RxSwift",
                 "SDWebImage",
             ],

@@ -3,6 +3,7 @@ import MapKit
 import RxSwift
 import RxCocoa
 import RxRelay
+import OrderedCollections
 
 // MARK: - View Controller
 
@@ -853,7 +854,7 @@ public final class AppleMapsViewController<Context>: UIViewController, MapLayerM
                 ?? (plannedRoute.status.isIdle ? MKDirections(plannedRoute: plannedRoute) : nil)
             // updating each and every existing planned route with new one even if they are `equal`,
             // to update their secondary properties like `status` and `polylines`
-            currentRequests.update(with: Layer.PlannedRouteRequest(
+            currentRequests.updateOrAppend(Layer.PlannedRouteRequest(
                 plannedRoute: plannedRoute,
                 directionRequest: directionRequest
             ))

@@ -2,6 +2,7 @@ import Foundation
 import CoreLocation
 import RxSwift
 import RxRelay
+import OrderedCollections
 
 // TODO: implement a way to plan route using original MKMapView API (like `setPolylineRoute` extension we use).
 
@@ -309,7 +310,7 @@ public final class MapLayer<Context> {
             updateState(notifyingObserver: true) { state in
                 for var plannedRoute in plannedRoutes where state.plannedRoutes.contains(plannedRoute) {
                     plannedRoute.status = .calculating
-                    state.plannedRoutes.update(with: plannedRoute)
+                    state.plannedRoutes.updateOrAppend(plannedRoute)
                 }
             }
         case let .didFinishCalculatingRoutes(plannedRoutesResult):
@@ -320,7 +321,7 @@ public final class MapLayer<Context> {
                         let polylines = plannedRoute.polylinesProvider(response)
                         plannedRoute.polylines = polylines
                     }
-                    state.plannedRoutes.update(with: plannedRoute)
+                    state.plannedRoutes.updateOrAppend(plannedRoute)
                 }
             }
         case .changingPosition, .didTapSidebarItem, .didTap, .didTapInsideOverlay, .didTapOnCluster:

@@ -7,6 +7,7 @@ import RxRelay
 import SwiftyMock
 import UIKit
 import WhimRandom
+import OrderedCollections
 
 @testable import WhimCore
 

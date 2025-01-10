@@ -10,6 +10,7 @@ import CoreLocation
 import MapKit
 import RxSwift
 import RxRelay
+import OrderedCollections
 
 @testable import WhimCore
 
