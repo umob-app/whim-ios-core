@@ -1,8 +1,12 @@
 import UIKit
 
 extension UIImage {
+    static var empty: UIImage {
+        UIImage(ciImage: .empty())
+    }
+
     /// Removes transparent pixels
-    public func cropAlpha() -> UIImage? {
+    func cropAlpha() -> UIImage? {
         guard let cgImage = cgImage else { return nil }
 
         let width = cgImage.width

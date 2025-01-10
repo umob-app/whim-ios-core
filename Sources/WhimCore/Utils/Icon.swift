@@ -75,13 +75,7 @@ public extension Icon {
     }
 }
 
-public extension UIImage {
-    static var empty: UIImage {
-        UIImage(ciImage: .empty())
-    }
-}
-
-public extension UIImageView {
+extension UIImageView {
     func setImage(
         with icon: Icon?,
         imageTransform: ImageTransformer = .none,
