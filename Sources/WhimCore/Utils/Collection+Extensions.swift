@@ -12,12 +12,6 @@ public extension Collection where Element: Collection {
     }
 }
 
-public extension Collection where Element: OptionalType {
-    var compacted: [Element.Wrapped] {
-        return compactMap { $0.optional }
-    }
-}
-
 public extension Collection where Element == Bool {
     var filtered: [Element] {
         return filter { $0 }

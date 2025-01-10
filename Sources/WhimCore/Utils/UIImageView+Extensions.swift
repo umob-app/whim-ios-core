@@ -9,18 +9,20 @@ extension UIImageView {
         layer.add(animation, forKey: "animation")
     }    
 
-    func setImage(with url: URL?,
-                  placeholderImage: UIImage? = nil,
-                  imageTransform: ImageTransformer = .none,
-                  refreshCached: Bool = true,
-                  avoidAutoSetImage: Bool = false,
-                  successfulCallback: ((UIImage?) -> Void)? = nil,
-                  errorCallback: ((Error) -> Void)? = nil) {
+    func setImage(
+        with url: URL?,
+        placeholderImage: UIImage? = nil,
+        imageTransform: ImageTransformer = .none,
+        refreshCached: Bool = true,
+        avoidAutoSetImage: Bool = false,
+        successfulCallback: ((UIImage?) -> Void)? = nil,
+        errorCallback: ((Error) -> Void)? = nil
+    ) {
         let options = [
             refreshCached ? SDWebImageOptions.refreshCached : nil,
             avoidAutoSetImage ? SDWebImageOptions.avoidAutoSetImage : nil
         ]
-        .compacted
+        .compactMap { $0 }
         .reduce(into: SDWebImageOptions()) { acc, option in
             acc.insert(option)
         }
