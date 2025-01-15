@@ -44,7 +44,7 @@ extension Reactive where Base: MKMapView {
 
 // MARK: Delegate Proxy
 
-extension MKMapView: HasDelegate {
+extension MKMapView: @retroactive HasDelegate {
     public typealias Delegate = MKMapViewDelegate
 }
 
