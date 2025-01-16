@@ -1,6 +1,6 @@
 import MapKit
 
-extension MKCoordinateSpan: Hashable {
+extension MKCoordinateSpan: @retroactive Hashable {
     public static func == (lhs: MKCoordinateSpan, rhs: MKCoordinateSpan) -> Bool {
         return lhs.latitudeDelta == rhs.latitudeDelta
             && lhs.longitudeDelta == rhs.longitudeDelta
@@ -12,7 +12,7 @@ extension MKCoordinateSpan: Hashable {
     }
 }
 
-extension MKCoordinateRegion: Hashable {
+extension MKCoordinateRegion: @retroactive Hashable {
     public static func == (lhs: MKCoordinateRegion, rhs: MKCoordinateRegion) -> Bool {
         return lhs.center == rhs.center
             && lhs.span == rhs.span
@@ -24,19 +24,19 @@ extension MKCoordinateRegion: Hashable {
     }
 }
 
-extension MKMapPoint: Equatable {
+extension MKMapPoint: @retroactive Equatable {
     public static func == (lhs: MKMapPoint, rhs: MKMapPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
 }
 
-extension MKMapSize: Equatable {
+extension MKMapSize: @retroactive Equatable {
     public static func == (lhs: MKMapSize, rhs: MKMapSize) -> Bool {
         return lhs.height == rhs.height && lhs.width == rhs.width
     }
 }
 
-extension MKMapRect: Equatable {
+extension MKMapRect: @retroactive Equatable {
     public static func == (lhs: MKMapRect, rhs: MKMapRect) -> Bool {
         return lhs.origin == rhs.origin && lhs.size == rhs.size
     }

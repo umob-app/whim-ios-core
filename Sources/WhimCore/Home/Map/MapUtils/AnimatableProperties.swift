@@ -108,4 +108,4 @@ public struct CustomAnimatable<T> {
 extension CustomAnimatable: Equatable where T: Equatable {}
 extension CustomAnimatable: Hashable where T: Hashable {}
 
-extension UIView.AnimationOptions: Hashable {}
+extension UIView.AnimationOptions: @retroactive Hashable {}
