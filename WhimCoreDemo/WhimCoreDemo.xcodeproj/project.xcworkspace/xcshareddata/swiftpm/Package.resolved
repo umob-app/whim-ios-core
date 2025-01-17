@@ -1,0 +1,33 @@
+{
+  "originHash" : "523bd84dcd850c8c1d1c0cc78bb82ec75f5bbafa57dee486b33073e7f25659cf",
+  "pins" : [
+    {
+      "identity" : "rxswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveX/RxSwift.git",
+      "state" : {
+        "revision" : "b4307ba0b6425c0ba4178e138799946c3da594f8",
+        "version" : "6.5.0"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "9248fe561a2a153916fb9597e3af4434784c6d32",
+        "version" : "5.13.4"
+      }
+    },
+    {
+      "identity" : "whim-ios-random",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maasglobal/whim-ios-random.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "51bcf8fa69bd47662073eb9673070629b3dd3c98"
+      }
+    }
+  ],
+  "version" : 3
+}
