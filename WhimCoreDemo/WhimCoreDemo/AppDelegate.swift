@@ -61,17 +61,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Uncomment next lines to see how absolute position is applied
         
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-        //            let nextMap = mapLayerManager.registerNewLayer()
-        //            nextMap.layer.setTrackingUser(false)
-        //            initial.push(scene: HomeSingleScene(top: InitialSceneTopBar(), bottom: NextSceneBottomSheet()))
-        //            mapLayerManager.requestControlForLayer(with: nextMap.layer.token, transferFromPrevLayer: .init(position: .absolute, options: [.configs]))
-        //        }
-        //
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-        //            initial.popToRoot()
-        //            mapLayerManager.requestControlForLayer(with: self.map.token, transferFromPrevLayer: .init(position: .absolute, options: []))
-        //        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            let nextMap = mapLayerManager.registerNewLayer()
+//            nextMap.layer.setTrackingUser(false)
+//            initial.push(scene: HomeSingleScene(top: InitialSceneTopBar(), bottom: NextSceneBottomSheet()))
+//            mapLayerManager.requestControlForLayer(with: nextMap.layer.token, transferFromPrevLayer: .init(position: .absolute, options: [.configs]))
+//        }
+//        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+//            initial.popToRoot()
+//            mapLayerManager.requestControlForLayer(with: self.map.token, transferFromPrevLayer: .init(position: .absolute, options: []))
+//        }
         
         return true
     }
