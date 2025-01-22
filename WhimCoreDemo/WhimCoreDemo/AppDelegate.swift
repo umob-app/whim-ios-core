@@ -41,23 +41,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow()
         
-        (map, mapLifetime) = mapLayerManager.registerNewLayer()
+//        (map, mapLifetime) = mapLayerManager.registerNewLayer()
         
-        let rootScene = HomeSingleScene(
-            top: InitialSceneTopBar(),
-            bottom: InitialSceneBottomSheet()
-        )
-        let initial = HomeSceneNavigationStack(rootScene)
-        //        let initial = testModalTransitions()
-        let home = HomeViewController(initial: initial)
+//        let rootScene = HomeSingleScene(
+//            top: InitialSceneTopBar(),
+//            bottom: InitialSceneBottomSheet()
+//        )
+//        let initial = HomeSceneNavigationStack(rootScene)
+//        //        let initial = testModalTransitions()
+//        let home = HomeViewController(initial: initial)
+        let vc = MainViewController(nibName: "MainViewController", bundle: nil)
         
-        window.rootViewController = home
+        vc.view.backgroundColor = .red
+        window.rootViewController = vc
         self.window = window
         window.makeKeyAndVisible()
         
-        locationManager.requestWhenInUseAuthorization()
+//        locationManager.requestWhenInUseAuthorization()
         
-        self.testMap()
+//        self.testMap()
         
         // Uncomment next lines to see how absolute position is applied
         
