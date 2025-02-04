@@ -1,8 +1,6 @@
 import Foundation
 import UIKit
 
-extension WhimCore {
-    static func image(named: String) -> UIImage? {
-        return UIImage(named: named, in: Bundle.module, compatibleWith: nil)
-    }
+func image(named: String) -> UIImage? {
+    UIImage(named: named, in: Bundle.module, compatibleWith: nil)
 }

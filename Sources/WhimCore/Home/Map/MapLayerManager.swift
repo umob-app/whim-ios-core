@@ -175,10 +175,6 @@ public final class MapLayerManager<Context> {
 
     public init() {}
 
-    deinit {
-        print("☠️ MapLayerManager")
-    }
-
     /// Creates new layer but doesn't activate it yet.
     /// - Parameter context: optional data to associate with the layer in the current context.
     /// - Returns:

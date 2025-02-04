@@ -46,12 +46,12 @@
       }
     },
     {
-      "identity" : "sdwebimage",
+      "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "location" : "https://github.com/apple/swift-collections",
       "state" : {
-        "revision" : "9248fe561a2a153916fb9597e3af4434784c6d32",
-        "version" : "5.13.4"
+        "revision" : "671108c96644956dddcd89dd59c203dcdb36cec7",
+        "version" : "1.1.4"
       }
     },
     {

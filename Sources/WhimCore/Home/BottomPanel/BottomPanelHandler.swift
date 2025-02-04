@@ -478,7 +478,7 @@ public final class BottomPanelHandler: ObservableConvertibleType {
         guard let bottomPanel = bottomPanel else { return }
 
         initialBottomPanelPoint = makeBottomPanelPoint(bottomPanel.bottomPanelInitialStickyPoint)
-        stickyPoints = (bottomPanel.bottomPanelStickyPoints.compactMap(makeBottomPanelPoint) + [initialBottomPanelPoint].compacted)
+        stickyPoints = (bottomPanel.bottomPanelStickyPoints.compactMap(makeBottomPanelPoint) + [initialBottomPanelPoint].compactMap { $0 })
             .sorted { $0.relative < $1.relative }
     }
 
