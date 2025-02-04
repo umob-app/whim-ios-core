@@ -70,8 +70,4 @@ open class AbstractService<State, Action> {
     open func dispatch(_ action: Action) {
         fatalError("You need to provide an implementation.")
     }
-
-    deinit {
-        print("☠️ \(Self.self)")
-    }
 }

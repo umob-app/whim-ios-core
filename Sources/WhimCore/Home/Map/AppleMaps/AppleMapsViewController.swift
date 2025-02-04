@@ -138,10 +138,6 @@ public final class AppleMapsViewController<Context>: UIViewController, MapLayerM
         fatalError("init(coder:) has not been implemented")
     }
 
-    deinit {
-        print("☠️ 🗺")
-    }
-
     public override func viewDidLoad() {
         super.viewDidLoad()
 
