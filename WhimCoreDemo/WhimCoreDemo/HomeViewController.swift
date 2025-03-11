@@ -87,9 +87,9 @@ public final class HomeViewController: HomeSceneContainerViewController, MapView
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-//        embed(viewController: mapViewController, inView: mapContainer)
-//        mapViewController.dynamicLayoutGuide = self
-        self.view.backgroundColor = .systemPink
+        embed(viewController: mapViewController, inView: mapContainer)
+        mapViewController.dynamicLayoutGuide = self
+//        self.view.backgroundColor = .systemPink
     }
 
     deinit {

@@ -27,7 +27,7 @@ import RxSwift
  ```
  */
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
@@ -41,25 +41,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow()
         
-//        (map, mapLifetime) = mapLayerManager.registerNewLayer()
+        (map, mapLifetime) = mapLayerManager.registerNewLayer()
         
-//        let rootScene = HomeSingleScene(
-//            top: InitialSceneTopBar(),
-//            bottom: InitialSceneBottomSheet()
-//        )
-//        let initial = HomeSceneNavigationStack(rootScene)
-//        //        let initial = testModalTransitions()
-//        let home = HomeViewController(initial: initial)
-        let vc = MainViewController(nibName: "MainViewController", bundle: nil)
-        
-        vc.view.backgroundColor = .red
-        window.rootViewController = vc
+        let rootScene = HomeSingleScene(
+            top: InitialSceneTopBar(),
+            bottom: InitialSceneBottomSheet()
+        )
+        let initial = HomeSceneNavigationStack(rootScene)
+        //        let initial = testModalTransitions()
+        let home = HomeViewController(initial: initial)
+
+        window.rootViewController = home
         self.window = window
         window.makeKeyAndVisible()
         
-//        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         
-//        self.testMap()
+        self.testMap()
         
         // Uncomment next lines to see how absolute position is applied
         
@@ -119,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func testMap() {
-        //        map.setCenter(.init(latitude: 60.165791, longitude: 24.941906), zoomLevel: 18, animated: true)
+        map.setCenter(.init(latitude: 60.165791, longitude: 24.941906), zoomLevel: 18, animated: true)
         map.events.subscribe(onNext: { e in print("🗺: \(e)") }).disposed(by: disposeBag)
         
         let reload = MapReloadSidebarItemView(style: .normal, highlightColor: .red, normalTintColor: .green)
