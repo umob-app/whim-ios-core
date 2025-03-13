@@ -265,17 +265,17 @@ public extension ProximityHash {
 // MARK: - Utils
 
 public extension MKCoordinateRegion {
-    var wLon: CLLocationDegrees { return corrected(lon: center.longitude - span.longitudeDelta / 2) }
-    var eLon: CLLocationDegrees { return corrected(lon: center.longitude + span.longitudeDelta / 2) }
-    var nLat: CLLocationDegrees { return corrected(lat: center.latitude + span.latitudeDelta / 2) }
-    var sLat: CLLocationDegrees { return corrected(lat: center.latitude - span.latitudeDelta / 2) }
+    var wLon: CLLocationDegrees { corrected(lon: center.longitude - span.longitudeDelta / 2) }
+    var eLon: CLLocationDegrees { corrected(lon: center.longitude + span.longitudeDelta / 2) }
+    var nLat: CLLocationDegrees { corrected(lat: center.latitude + span.latitudeDelta / 2) }
+    var sLat: CLLocationDegrees { corrected(lat: center.latitude - span.latitudeDelta / 2) }
 
-    var nw: CLLocationCoordinate2D { return CLLocationCoordinate2D(latitude: nLat, longitude: wLon) }
-    var se: CLLocationCoordinate2D { return CLLocationCoordinate2D(latitude: sLat, longitude: eLon) }
-    var sw: CLLocationCoordinate2D { return CLLocationCoordinate2D(latitude: sLat, longitude: wLon) }
-    var ne: CLLocationCoordinate2D { return CLLocationCoordinate2D(latitude: nLat, longitude: eLon) }
+    var nw: CLLocationCoordinate2D { CLLocationCoordinate2D(latitude: nLat, longitude: wLon) }
+    var se: CLLocationCoordinate2D { CLLocationCoordinate2D(latitude: sLat, longitude: eLon) }
+    var sw: CLLocationCoordinate2D { CLLocationCoordinate2D(latitude: sLat, longitude: wLon) }
+    var ne: CLLocationCoordinate2D { CLLocationCoordinate2D(latitude: nLat, longitude: eLon) }
 
-    var vertices: [CLLocationCoordinate2D] { return [ne, se, sw, nw] }
+    var vertices: [CLLocationCoordinate2D] { [ne, se, sw, nw] }
 }
 
 public extension MKMapRect {
