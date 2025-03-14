@@ -10,24 +10,26 @@ let package = Package(
     products: [
         .library(
             name: "WhimCore",
-            targets: ["WhimCore"]),
+            targets: ["WhimCore"]
+        ),
     ],
     dependencies: [
+        // Sources
         .package(url: "https://github.com/ReactiveX/RxSwift.git", exact: "6.5.0"),
+        .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.1.0")),
+        // Tests
         .package(url: "https://github.com/Quick/Quick.git", .upToNextMajor(from: "4.0.0")),
         .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "9.0.0")),
         .package(url: "https://github.com/stanfy/SwiftyMock.git", branch: "spm"),
         .package(url: "https://github.com/maasglobal/whim-ios-random.git", branch: "main"),
-        .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.1.0")),
     ],
     targets: [
         .target(
             name: "WhimCore",
             dependencies: [
-                .product(name: "WhimRandom", package: "whim-ios-random"),
+                "RxSwift",
                 .product(name: "RxCocoa", package: "RxSwift"),
                 .product(name: "OrderedCollections", package: "swift-collections"),
-                "RxSwift",
             ],
             resources: [
                 .process("Resources"),
@@ -43,6 +45,7 @@ let package = Package(
                 .product(name: "WhimRandom", package: "whim-ios-random"),
                 .product(name: "RxTest", package: "RxSwift"),
                 .product(name: "RxBlocking", package: "RxSwift"),
-            ]),
+            ]
+        ),
     ]
 )

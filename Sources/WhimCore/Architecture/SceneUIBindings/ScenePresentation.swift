@@ -14,10 +14,6 @@ import RxSwift
 /// UI component can be developed in total isolation from its BLL part, as it only relies on its own state.
 /// It can be tested without the need to setup app environment and preferrable conditions for the business logic to work,
 /// just call `render` with mock data and see how it looks like - can't be easier.
-///
-/// Use `WhimCore` example project or playground during active UI development phase
-/// to concentrate only on UI component development (no business logic, no preconditions, no navigation, no backend)
-/// and to extremely shorten feedback cycle by fast compilation time.
 public protocol ScenePresentation: AnyObject {
     associatedtype State
     associatedtype Action

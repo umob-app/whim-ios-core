@@ -7,12 +7,12 @@
 ///   you'd need to create a common interface for both of them.
 ///
 /// Solution:
-///   Creating an abstract class, that in theory should satisfy all needs for V2 unidirectional services.
+///   Creating an abstract class, that in theory should satisfy all needs for unidirectional services.
 ///   Having a method to dispatch actions as its input and observable state as its output.
-///   Creating a single abstract interface to describe all V2 services might seem a little too impulsive,
+///   Creating a single abstract interface to describe all services might seem a little too ambitious,
 ///   however we can try it out and see how far we can go with this solution.
 ///   If we don't like it, it will cost us nothing to get rid of it and use any alternative solution.
-///   One if its major downsides is that once you inherit from one class, you can inherit from another.
+///   One if its major downsides is that once you inherit from one class, you can't inherit from another.
 ///
 /// Alternatives:
 ///   - First thing that comes to mind is to have a separate protocol for every implementation/fake pair.
@@ -22,10 +22,6 @@
 ///   - Second option is to create an abstract protocol, so that any service or any of their fakes could conform to,
 ///     as its interface is most likely going to be the same (observe state and dispatch action).
 ///     However protocols with associated types need extra effort like type erasure thunks to avoid hassle while using them in swift.
-///
-/// Even though I personally try to avoid inheritance, idea of abstract class suits well here to solve both:
-/// flexibility to swap production and fake implementations for unit-testing,
-/// and remove extra boilerplate of having additional protocol for every V2 service with common interface.
 ///
 /// To simplify usage of such abstract class, we can create typealias for every service.
 /// It will actually encapsulate that we're using this class,
