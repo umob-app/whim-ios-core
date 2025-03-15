@@ -23,9 +23,9 @@ final class FakeMapLayerManagerDelegate<Context>: MapLayerManagerDelegate {
     }
 }
 
-final class FakeSceneNavigationStack: HomeSceneNavigationStack {
-    let presentCall = FunctionCall<(scene: HomeScene, animating: HomeSceneAnimatedTransitioning?), Void>()
-    override func present(scene: HomeScene, animating: HomeSceneAnimatedTransitioning?) {
+final class FakeSceneNavigationStack: WhimSceneNavigationStack {
+    let presentCall = FunctionCall<(scene: WhimScene, animating: WhimSceneAnimatedTransitioning?), Void>()
+    override func present(scene: WhimScene, animating: WhimSceneAnimatedTransitioning?) {
         stubCall(presentCall, argument: (scene, animating), defaultValue: ())
     }
 }

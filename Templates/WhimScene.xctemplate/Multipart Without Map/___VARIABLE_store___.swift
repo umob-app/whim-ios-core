@@ -17,7 +17,7 @@ extension ___VARIABLE_store:identifier___ {
 
 extension ___VARIABLE_store:identifier___ {
     enum Action {
-        case .didTapCloseButton
+        case didTapCloseButton
     }
 
     enum Event {

@@ -3,11 +3,11 @@
 import UIKit
 import WhimCore
 
-final class ___VARIABLE_viewController:identifier___: UIViewController, WhimScenePresentation {
+final class ___VARIABLE_bottom:identifier___: UIViewController, WhimScenePresentation {
     typealias State = ___VARIABLE_store:identifier___.State
     typealias Action = ___VARIABLE_store:identifier___.Action
 
-    var output: ___VARIABLE_viewController:identifier___.Dispatch?
+    var output: ___VARIABLE_bottom:identifier___.Dispatch?
 
     private(set) var state: State = .initial
 
