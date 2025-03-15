@@ -5,24 +5,24 @@ import WhimCore
 import RxSwift
 
 /* Some Tips:
- 
+
  - Create your new scene:
  ```
- let yourScene = HomeSingleScene(
+ let yourScene = WhimSingleScene(
  top: UIViewController(),
  bottom: UIViewController()
  )
  ```
- 
- - Change home scene by setting new root scene, with(-out) one of the provided (or custom) animations:
+
+ - Change whim scene by setting new root scene, with(-out) one of the provided (or custom) animations:
  ```
- home.set(root: yourScene, animating: HomeSceneAnimatedTransitions.Fade())
+ whim.set(root: yourScene, animating: WhimSceneAnimatedTransitions.Fade())
  ```
- 
- - Create navigation stack with `yourScene` as its root scene, and present it on `home`:
+
+ - Create navigation stack with `yourScene` as its root scene, and present it on `whim`:
  ```
- let nav = HomeSceneNavigationStack(yourScene)
- home.set(root: nav)
+ let nav = WhimSceneNavigationStack(yourScene)
+ whim.set(root: nav)
  nav.push(scene: yourNextScene)
  ```
  */
@@ -30,59 +30,59 @@ import RxSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    
-    var map: MapLayer<MaasHomeMap>!
+
+    var map: MapLayer<WhimDemoMap>!
     var mapLifetime: MapLayerLifetime!
-    
+
     private let disposeBag = DisposeBag()
-    
+
     private let locationManager = CLLocationManager()
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow()
-        
+
         (map, mapLifetime) = mapLayerManager.registerNewLayer()
-        
-        let rootScene = HomeSingleScene(
+
+        let rootScene = WhimSingleScene(
             top: InitialSceneTopBar(),
             bottom: InitialSceneBottomSheet()
         )
-        let initial = HomeSceneNavigationStack(rootScene)
+        let initial = WhimSceneNavigationStack(rootScene)
         //        let initial = testModalTransitions()
-        let home = HomeViewController(initial: initial)
+        let whim = WhimViewController(initial: initial)
 
-        window.rootViewController = home
+        window.rootViewController = whim
         self.window = window
         window.makeKeyAndVisible()
-        
+
         locationManager.requestWhenInUseAuthorization()
-        
+
         self.testMap()
-        
+
         // Uncomment next lines to see how absolute position is applied
-        
+
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //            let nextMap = mapLayerManager.registerNewLayer()
 //            nextMap.layer.setTrackingUser(false)
-//            initial.push(scene: HomeSingleScene(top: InitialSceneTopBar(), bottom: NextSceneBottomSheet()))
+//            initial.push(scene: WhimSingleScene(top: InitialSceneTopBar(), bottom: NextSceneBottomSheet()))
 //            mapLayerManager.requestControlForLayer(with: nextMap.layer.token, transferFromPrevLayer: .init(position: .absolute, options: [.configs]))
 //        }
-//        
+//
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
 //            initial.popToRoot()
 //            mapLayerManager.requestControlForLayer(with: self.map.token, transferFromPrevLayer: .init(position: .absolute, options: []))
 //        }
-        
+
         return true
     }
-    
-    private func testModalTransitions() -> HomeScene {
-        let fullscreenTo = HomeSingleScene(fullscreen: UIViewController())
-        let fullscreenFrom = HomeSingleScene(fullscreen: UIViewController())
-        
-        let multipartTo = HomeSingleScene(top: UIViewController(), bottom: UIViewController())
-        let multipartFrom = HomeSingleScene(top: UIViewController(), bottom: UIViewController())
-        
+
+    private func testModalTransitions() -> WhimScene {
+        let fullscreenTo = WhimSingleScene(fullscreen: UIViewController())
+        let fullscreenFrom = WhimSingleScene(fullscreen: UIViewController())
+
+        let multipartTo = WhimSingleScene(top: UIViewController(), bottom: UIViewController())
+        let multipartFrom = WhimSingleScene(top: UIViewController(), bottom: UIViewController())
+
         fullscreenFrom.viewController.viewControllers.first?.view.backgroundColor = .blue
         multipartFrom.viewController.viewControllers.first?.view.backgroundColor = .purple
         multipartFrom.viewController.viewControllers.last?.view.backgroundColor = .blue
@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             $0.view.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([$0.view.heightAnchor.constraint(equalToConstant: 100)])
         }
-        
+
         fullscreenTo.viewController.viewControllers.first?.view.backgroundColor = .yellow
         multipartTo.viewController.viewControllers.first?.view.backgroundColor = .yellow
         multipartTo.viewController.viewControllers.last?.view.backgroundColor = .green
@@ -98,34 +98,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             $0.view.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([$0.view.heightAnchor.constraint(equalToConstant: 100)])
         }
-        
-        //        let nav = HomeSceneNavigationStack(fullscreenFrom)
-        let nav = HomeSceneNavigationStack(multipartFrom)
-        
+
+        //        let nav = WhimSceneNavigationStack(fullscreenFrom)
+        let nav = WhimSceneNavigationStack(multipartFrom)
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            nav.push(scene: multipartTo, animating: HomeSceneAnimatedTransitions.Modal(.present))
-            //            nav.push(scene: fullscreenTo, animating: HomeSceneAnimatedTransitions.Modal(.present))
-            
-            //            nav.push(scene: multipartTo, animating: HomeSceneAnimatedTransitions.Modal(.dismiss))
-            //            nav.push(scene: fullscreenTo, animating: HomeSceneAnimatedTransitions.Modal(.dismiss))
-            
-            //            nav.push(scene: multipartTo, animating: HomeSceneAnimatedTransitions.Modal(.swap))
-            //            nav.push(scene: fullscreenTo, animating: HomeSceneAnimatedTransitions.Modal(.swap))
+            nav.push(scene: multipartTo, animating: WhimSceneAnimatedTransitions.Modal(.present))
+            //            nav.push(scene: fullscreenTo, animating: WhimSceneAnimatedTransitions.Modal(.present))
+
+            //            nav.push(scene: multipartTo, animating: WhimSceneAnimatedTransitions.Modal(.dismiss))
+            //            nav.push(scene: fullscreenTo, animating: WhimSceneAnimatedTransitions.Modal(.dismiss))
+
+            //            nav.push(scene: multipartTo, animating: WhimSceneAnimatedTransitions.Modal(.swap))
+            //            nav.push(scene: fullscreenTo, animating: WhimSceneAnimatedTransitions.Modal(.swap))
         }
-        
+
         return nav
     }
-    
+
     private func testMap() {
         map.setCenter(.init(latitude: 60.165791, longitude: 24.941906), zoomLevel: 18, animated: true)
         map.events.subscribe(onNext: { e in print("🗺: \(e)") }).disposed(by: disposeBag)
-        
+
         let reload = MapReloadSidebarItemView(style: .normal, highlightColor: .red, normalTintColor: .green)
-        
+
         let trackUserHighlight: MapSidebarItem.Custom = .init(id: "trackUserHighlighted", content: MapSidebarItem.Content.image(UIImage(named: "map-icon-location-filled")!.withRenderingMode(.alwaysTemplate), tintColor: .red))
-        
+
         let trackUserNormal: MapSidebarItem.Custom = .init(id: "trackUserNormal", content: MapSidebarItem.Content.image(UIImage(named: "map-icon-location")!.withRenderingMode(.alwaysTemplate), tintColor: .green))
-        
+
         map.sidebar = [.trackUser(highlightedContent: trackUserHighlight, normalContent: trackUserNormal), .reload(reload)]
         map.events.compactMap(\.map?.didTapSidebarItem?.reload)
             .observe(on: MainScheduler.asyncInstance)
@@ -133,28 +133,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 item.style = item.style == .normal ? .spinning : .normal
             })
             .disposed(by: disposeBag)
-        
+
         guard mapLayerManager.requestControlForLayer(with: map.token, transferFromPrevLayer: .init(position: .absolute, options: [])) else {
             print("☠️ couldn't request map layer control")
             return
         }
-        
+
         // MARK: GeoCache
-        
+
         let length = 7
         let radius = 2000.0
         let cache = GeoCache<String>(precision: length)
         reload.style = .highlighted
-        
+
         Observable.combineLatest(
             map.events.compactMap(\.map?.changingPosition).filter(\.status.isEnded),
-            map.events.compactMap(\.map?.didTapAnywhere).do(onNext: { [weak self] coord in
-                let coord = coord ?? CLLocationCoordinate2D()
+            map.events.compactMap(\.map?.didTapAnywhere).do(onNext: { [weak self] (coord: CLLocationCoordinate2D) in
                 self?.map.overlays.append(.circle(MapCircle(coordinate: coord, radius: radius, lineWidth: 2, fillColor: UIColor.red.withAlphaComponent(0.1))))
                 let now = Date()
-                cache.insert(items: (1...500).map { _ in .init(value: String.random(length: 3), coordinate: coord) }, aroundCoordinate: coord, inRadius: radius)
+                cache.insert(items: (1...500).map { x in .init(value: "\(x)", coordinate: coord) }, aroundCoordinate: coord, inRadius: radius)
                 print("📥 \(abs(now.timeIntervalSinceNow))")
-                
+
                 //                let ghashes = ProximityHash.geohashes(aroundCoordinate: coord, inRadius: radius, ofLength: length, includingIntersecting: true)
                 //                let boxes = ghashes.compactMap { ghash, bounds in
                 //                    GeoHash.Box(geohash: ghash).map { (box: $0, bounds: bounds) }
@@ -173,7 +172,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //            let hasCoverage = args.zoom < 13
             //                ? cache.hasCoverage(of: 0.5, inRegion: .circular(.init(center: args.center, radius: radius)))
             //                : cache.hasCoverage(of: 0.5, inRegion: .rectangular(.init(region: .init(center: args.center, span: .init(latitudeDelta: args.span.latitudeDelta, longitudeDelta: args.span.longitudeDelta)))))
-            
+
             //            print("📊 \(abs(now.timeIntervalSinceNow)): \(hasCoverage)")
             //
             //            if !hasCoverage {
@@ -181,13 +180,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //            } else {
             //                reload.style = .normal
             //            }
-            
+
             let result = args.zoom < 13
             ? cache.search(aroundCoordinate: args.center, inRadius: radius)
             : cache.search(inRect: .init(center: args.center, span: .init(latitudeDelta: args.span.latitudeDelta, longitudeDelta: args.span.longitudeDelta)))
-            
+
             print("📊 \(abs(now.timeIntervalSinceNow)): \(result.coverage)")
-            
+
             if result.coverage < 0.5 {
                 reload.style = .highlighted
             } else {
@@ -195,9 +194,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         })
         .disposed(by: disposeBag)
-        
+
         // MARK: Overlays, Routes & Clustering
-        
+
         //        var colors: [UIColor] = [.red, .blue, .magenta, .orange, .purple, .gray]
         //        var colorStationMap: [String: UIColor] = [:] {
         //            didSet {
@@ -306,12 +305,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 private final class CustomAnotationView: UIView {
     private let shouldAnimate: Bool
-    
+
     init(frame: CGRect, color: UIColor, text: String? = nil, animated: Bool) {
         shouldAnimate = animated
         super.init(frame: frame)
         backgroundColor = color
-        
+
         if let text = text {
             let label = UILabel(frame: .init(x: 3, y: 0, width: 27, height: 33))
             label.textColor = .white
@@ -321,22 +320,22 @@ private final class CustomAnotationView: UIView {
             label.adjustsFontSizeToFitWidth = true
             label.textAlignment = .center
             addSubview(label)
-            
+
         }
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        
+
         guard shouldAnimate, superview != nil else { return }
-        
+
         layer.removeAllAnimations()
         transform = CGAffineTransform(scaleX: 0, y: 0)
-        
+
         UIView.animate(withDuration: 3, delay: 0, options: .curveEaseOut, animations: {
             self.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         }, completion: { _ in
@@ -345,15 +344,15 @@ private final class CustomAnotationView: UIView {
             })
         })
     }
-    
+
     override func removeFromSuperview() {
         super.removeFromSuperview()
-        
+
         guard shouldAnimate else { return }
-        
+
         layer.removeAllAnimations()
         transform = .identity
-        
+
         UIView.animate(withDuration: 3, delay: 0, options: .curveEaseIn, animations: {
             self.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
         }, completion: { _ in
@@ -380,10 +379,10 @@ class NextTopBar: UIViewController {
 
 class NextSceneBottomSheet: UIViewController, BottomPanel {
     private(set) lazy var bottomPanelHandler = BottomPanelHandler(bottomPanel: self)
-    
+
     var bottomPanelInitialStickyPoint: BottomPanelStickyPoint { .fromBottom(.points(400)) }
     var bottomPanelStickyPoints: Set<BottomPanelStickyPoint> { [.fromTop(.points(100))] }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .blue
@@ -639,7 +638,7 @@ let luxInstallations: [(coordinate: CLLocationCoordinate2D, identifier: String)]
     (CLLocationCoordinate2D(latitude: 60.16789434921882, longitude: 24.941950361303338), "LUX"),
     (CLLocationCoordinate2D(latitude: 60.173444535340742, longitude: 24.944782774023064), "LUX"),
     (CLLocationCoordinate2D(latitude: 60.175835095802341, longitude: 24.937487165502557), "LUX")
-    
+
 ]
 
 let testStations = [testBuses, testTrams, testTrains, testSubways, testFerries]

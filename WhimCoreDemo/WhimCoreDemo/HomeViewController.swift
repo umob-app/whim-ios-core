@@ -3,13 +3,13 @@ import RxSwift
 import RxRelay
 import WhimCore
 
-public enum MaasHomeMap {
+public enum WhimDemoMap {
     case initial
 }
 
-public let mapLayerManager = MapLayerManager<MaasHomeMap>()
+public let mapLayerManager = MapLayerManager<WhimDemoMap>()
 
-public final class HomeViewController: HomeSceneContainerViewController, MapViewControllerDynamicLayoutGuide {
+public final class WhimViewController: WhimSceneContainerViewController, MapViewControllerDynamicLayoutGuide {
     private lazy var mapViewController: AppleMapsViewController = {
         return AppleMapsViewController(layerManager: mapLayerManager)
     }()
@@ -115,7 +115,7 @@ private extension UIView {
     }
 }
 
-private extension HomeViewController {
+private extension WhimViewController {
     func embed(viewController: UIViewController, inView containerView: UIView) {
         addChild(viewController)
         containerView.embed(view: viewController.view)

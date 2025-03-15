@@ -1,5 +1,5 @@
 {
-  "originHash" : "523bd84dcd850c8c1d1c0cc78bb82ec75f5bbafa57dee486b33073e7f25659cf",
+  "originHash" : "0526fb9d51c7b9ce573376d78ba9f2fa4762ba084687a2a8ba45788c85d71a37",
   "pins" : [
     {
       "identity" : "rxswift",
@@ -11,21 +11,12 @@
       }
     },
     {
-      "identity" : "sdwebimage",
+      "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "location" : "https://github.com/apple/swift-collections",
       "state" : {
-        "revision" : "9248fe561a2a153916fb9597e3af4434784c6d32",
-        "version" : "5.13.4"
-      }
-    },
-    {
-      "identity" : "whim-ios-random",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/maasglobal/whim-ios-random.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "51bcf8fa69bd47662073eb9673070629b3dd3c98"
+        "revision" : "671108c96644956dddcd89dd59c203dcdb36cec7",
+        "version" : "1.1.4"
       }
     }
   ],
