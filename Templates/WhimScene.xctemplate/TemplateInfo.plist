@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Whim Architecture Scene</string>
+    <key>Kind</key>
+    <string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
+    <key>Options</key>
+    <array>
+        <dict>
+            <key>Description</key>
+            <string>Description of how to use template</string>
+            <key>Identifier</key>
+            <string>productDescription</string>
+            <key>Name</key>
+            <string>Enter ONLY Scene Name:</string>
+            <key>Type</key>
+            <string>static</string>
+            <key>Default</key>
+            <string>e.g. UserLogin (without ViewController)</string>
+        </dict>
+        <dict>
+            <key>Description</key>
+            <string>The name of the scene to create</string>
+            <key>Identifier</key>
+            <string>productName</string>
+            <key>Name</key>
+            <string>Scene:</string>
+            <key>NotPersisted</key>
+            <true/>
+            <key>Required</key>
+            <true/>
+            <key>Type</key>
+            <string>text</string>
+        </dict>
+        <dict>
+            <key>Identifier</key>
+            <string>sceneType</string>
+            <key>Required</key>
+            <true/>
+            <key>Name</key>
+            <string>Scene Type:</string>
+            <key>Description</key>
+            <string>Whim scene type variation</string>
+            <key>Type</key>
+            <string>popup</string>
+            <key>Default</key>
+            <string>Multipart With Map</string>
+            <key>Values</key>
+            <array>
+                <string>Multipart With Map</string>
+                <string>Multipart Without Map</string>
+                <string>Fullscreen</string>
+            </array>
+        </dict>
+        <dict>
+            <key>Identifier</key>
+            <string>builder</string>
+            <key>Type</key>
+            <string>static</string>
+            <key>Default</key>
+            <string>___VARIABLE_productName:identifier___Builder</string>
+        </dict>
+        <dict>
+            <key>Identifier</key>
+            <string>store</string>
+            <key>Type</key>
+            <string>static</string>
+            <key>Default</key>
+            <string>___VARIABLE_productName:identifier___Store</string>
+        </dict>
+        <dict>
+            <key>Identifier</key>
+            <string>viewController</string>
+            <key>Type</key>
+            <string>static</string>
+            <key>Default</key>
+            <string>___VARIABLE_productName:identifier___ViewController</string>
+        </dict>
+        <dict>
+            <key>Identifier</key>
+            <string>top</string>
+            <key>Type</key>
+            <string>static</string>
+            <key>Default</key>
+            <string>___VARIABLE_productName:identifier___TopBar</string>
+        </dict>
+        <dict>
+            <key>Identifier</key>
+            <string>bottom</string>
+            <key>Type</key>
+            <string>static</string>
+            <key>Default</key>
+            <string>___VARIABLE_productName:identifier___ViewController</string>
+        </dict>
+        <dict>
+            <key>Identifier</key>
+            <string>map</string>
+            <key>Type</key>
+            <string>static</string>
+            <key>Default</key>
+            <string>___VARIABLE_productName:identifier___Map</string>
+        </dict>
+    </array>
+    <key>Platforms</key>
+    <array>
+        <string>com.apple.platform.iphoneos</string>
+    </array>
+    <key>SortOrder</key>
+    <string>10</string>
+    <key>Summary</key>
+    <string>Whim Architecture Scene</string>
+</dict>
+</plist>

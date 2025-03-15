@@ -47,7 +47,7 @@ final class ___VARIABLE_service:identifier___: ___VARIABLE_serving:identifier___
     }
 
     init(
-        scheduler: SchedulerType = SerialDispatchQueueScheduler(qos: .userInitiated, internalSerialQueueName: "com.whim2.___VARIABLE_service:identifier___")
+        scheduler: SchedulerType = SerialDispatchQueueScheduler(qos: .userInitiated, internalSerialQueueName: "com.whim.___VARIABLE_service:identifier___")
     ) {
         system = FeedbackSystem(
             initial: .initial,

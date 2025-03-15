@@ -233,8 +233,8 @@ final class AuthService {
 }
 ```
 
-This is a pretty imperative way to treat state machines and perform effects, but it works.    
-So far, it doesn't require any additional tools except for one we're already using - Rx.    
+This is a pretty imperative way to treat state machines and perform effects, but it works.
+So far, it doesn't require any additional tools except for one we're already using - Rx.
 Though, we might shift our attention to [Combine](https://developer.apple.com/documentation/combine), once we deprecate iOS 12 and start introducing [SwiftUI + Combine](https://developer.apple.com/xcode/swiftui) in the future.
 
 ## 🚥 States
@@ -284,7 +284,7 @@ state2.counter += 1 // prints: "State changed: State(counter: 0) –> State(coun
 You'd usually use either `enum` or `struct` to design domain state model based on its properties.
 
 You may want to choose `enum` when your state consists of different stages and different data is available during each of them, so basically when your state may change its shape.
-And you may want to use `struct` when state doesn't change its shape during different stages, but just fills it with data. 
+And you may want to use `struct` when state doesn't change its shape during different stages, but just fills it with data.
 
 ❌ This is how you don't want to design your state. Compiler can't guarantee that invalid invariants won't happen. And it's hard to get a proper understanding of its intention because of ambiguous design.
 
@@ -293,7 +293,7 @@ struct State {
   // does empty array mean that we've loaded empty dataset or does it mean that we haven't loaded any yet?
   var items: [Item]
 
-  // what if we have both isLoading=true and error at the same time? 
+  // what if we have both isLoading=true and error at the same time?
   // even worse - what if we have items, error and isLoading=true, how should we treat such state?
   var isLoading: Bool
   var error: Error?
@@ -367,14 +367,14 @@ extension State {
     case .loading: return nil
     case .loaded(.success): return nil
     case let .loaded(.failure(_, error)): return error
-    } 
+    }
   }
 }
 ```
 
 #### State Machines
 
-As with states, state machines can be either defined explictily or used implicitly. In case of implicit state machines, we can just verify current state in-place and change it to the new one if it fits our logic.    
+As with states, state machines can be either defined explictily or used implicitly. In case of implicit state machines, we can just verify current state in-place and change it to the new one if it fits our logic.
 Like we did in example above.
 
 ```swift
@@ -386,8 +386,8 @@ func login() {
 
 This is an okay way to go if we don't have complex system. However such approach mixes state transition with other logic and effects. And if we want to unit-test such behavior we'd need to setup whole system with all the dependencies and perform all the complex flows to bring it into needed state and check its behavior when we want to change it.
 
-In such cases it's good to have explicitly defined state machine. We won't need any 3rd party solutions for this as it's pretty simple task.    
-First thing we'll need to introduce is an intention to change state. Let's call it `Event`.    
+In such cases it's good to have explicitly defined state machine. We won't need any 3rd party solutions for this as it's pretty simple task.
+First thing we'll need to introduce is an intention to change state. Let's call it `Event`.
 Second thing we'll need is a way to change state based on the events. And it's actually a simple pure function. Given current state and event to change it, we return new state.
 
 ```swift
@@ -404,7 +404,7 @@ Second thing we'll need is a way to change state based on the events. And it's a
 ```
 
 Event is usually represented as `enum` as it's easy to pattern match over it, and it can have associated values to hold any data that might be needed for transition.
-We can improve our example above, by introducing `enum Event` and extending `State` by describing our transitions as a pure static function.    
+We can improve our example above, by introducing `enum Event` and extending `State` by describing our transitions as a pure static function.
 Let's call it `reduce` as its type looks similar to other reducing functions. We basically accumulate our state by given events.
 
 ```swift
@@ -487,11 +487,11 @@ final class Screen: UIViewController {
 }
 ```
 
-Now we should be able to fully render UI at any point in time using only given state.    
-With event-driven approach you get a bunch of events that you should somehow synchronize with current UI, think of their order and apply them accordingly.    
+Now we should be able to fully render UI at any point in time using only given state.
+With event-driven approach you get a bunch of events that you should somehow synchronize with current UI, think of their order and apply them accordingly.
 Data-driven, on the contrary, requires you to update your source of truth (state) first, and then derive UI from it. Even if, by any chance, your UI gets out of sync for a moment, next update of state will cause it to redraw and will remove this glitch. With data-driven approach you don't care about order of events, the only even you have is state update. I highly recommend watching [WWDC 2019 #204](https://developer.apple.com/videos/play/wwdc2019/204/) talk to see how this approach is used in SwiftUI.
 
-So far our view-controller looks pretty neat and doesn't have any dependencies except for the state, which is a plain data structure.    
+So far our view-controller looks pretty neat and doesn't have any dependencies except for the state, which is a plain data structure.
 Seems like there should be someone else, who's producing the state and performs business logic. We don't know who it is yet, but we definitely need to have some ability to communicate back and tell when we want to perform some action, whether it comes straight from the user or from UIKit.
 
 The simplest way to go is to have plain function that accepts some action.
@@ -500,7 +500,7 @@ The simplest way to go is to have plain function that accepts some action.
 (Action) -> Void
 ```
 
-This approach is starting to look very similar to services design we discussed earlier. But now view-controller is on the other side and has "inverted" API. Instead of producing state, it receives it. Instead of receiving actions, it dispatches them. Let's add output property to our view-controller. 
+This approach is starting to look very similar to services design we discussed earlier. But now view-controller is on the other side and has "inverted" API. Instead of producing state, it receives it. Instead of receiving actions, it dispatches them. Let's add output property to our view-controller.
 Even though, I strongly suggest using constructor injection, I decided to go with variable injection here, as it doesn't limit us to initiating view-controllers from xib, storyboard or without any at all. And with such design we can't mess up UI by re-assigning output or even setting it to nil in runtime.
 
 ```swift
@@ -519,7 +519,7 @@ class Screen: UIViewController {
 }
 ```
 
-So far, we've introduced only one new dependency, and it's an `Action` type. Actions can be usually designed as enums because of the same reasons `Event` is usually an enum - exhaustive pattern matching and ability to add different payloads to each case.    
+So far, we've introduced only one new dependency, and it's an `Action` type. Actions can be usually designed as enums because of the same reasons `Event` is usually an enum - exhaustive pattern matching and ability to add different payloads to each case.
 We have fully designed our view-controller with state and actions. We don't need any business logic with its scary dependencies at all. We can test its UI by giving it any possible `State` we want. We can design it in isolation from our main project (though we might need only few UI extensions and utils). We can finally enjoy fast compilation and immediate access to this screen in playground preview or sandboxed app in simulator or on device. No need to click thousand times to find this screen in our huge app, no need for server to be working to see how it will look like, i.e. filled with data, in loading state or after failure, just pass state or sequence of states with timer and see how it renders.
 
 Developing UI in isolation also helps you to untangle your code. This way you're not seduced by using business entities for rendering, but you're designing small and lightweight structures, driven by UI requirements. Next time you'd need to change business entities structure, you'd only have to update mapping from BLL models to UI models and in no way you'd need to mess with UI code.
@@ -556,7 +556,7 @@ extension Store {
 }
 ```
 
-The only difference between store and services is that services have explicit methods, while store accepts action, which represents number of methods.    
+The only difference between store and services is that services have explicit methods, while store accepts action, which represents number of methods.
 Of course we could achieve same result by introducing `protocol` with bunch of methods instead of `(Action) -> Void` output. However I find it to be a better way to guarantee unidirectional approach.
 It's easy to hack using protocols when tempted, as you can define methods that immeditely return results, which violates unidirectional approach. It's also easy to introduce other unwanted stuff into protocol, while a simple function with a single argument minimzes this risk. Unfortunately we can't guarantee at compile-time that `Action` won't contain functions, but we'll leave this part for PRs review :)
 
@@ -691,8 +691,8 @@ Of course it's crucial to touch flows and navigation topic, as we don't work wit
 
 * The deeper the flow goes, the more data and dependencies you need to pass to the next screen in the flow, as they should be passed through each screen in predefined order.
 
-One of the most popular approaches is coordinators. You would declare coordinator as a plain object (not related to UIKit) which contains logic of navigating through the flow and its current state. 
-And it can be easily unit-tested as it has its own state and doesn't depend on UIKit. 
+One of the most popular approaches is coordinators. You would declare coordinator as a plain object (not related to UIKit) which contains logic of navigating through the flow and its current state.
+And it can be easily unit-tested as it has its own state and doesn't depend on UIKit.
 However there are few critical drawbacks to such an approach - it can be easily desynchronized with UIKit's own navigation state and it introduces new abstraction to implement, support and learn.
 
 The idea is to use simple view controllers for fulfilling purpose of the flows.
@@ -718,7 +718,7 @@ The idea is to use simple view controllers for fulfilling purpose of the flows.
 * Whole `UIViewController` API is at our disposal including `UIResponder`.
   For example we can make use of such mechanism like [`show(_:sender:)`](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621377-show) method along with [`targetViewController(forAction:sender:)`](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621415-targetviewcontroller) + [`canPerformAction(_:withSender:)`](https://developer.apple.com/documentation/uikit/uiresponder/1621105-canperformaction) for simple navigation in custom stacks.
 
-There're few ways to use view-controllers as coordinators: 
+There're few ways to use view-controllers as coordinators:
 - You may embed child controllers with or without custom transitions.
 - You may inherit or embed navigation stack or other UIKit navigation controller (i.e. tabbar controller) and use them to move through the flow.
 - Sometimes you may not even need other view-controllers to be part of the flow and instead switch views inside single view-controller.
@@ -755,13 +755,13 @@ There're two good articles explaining how such an approach can be achieved and w
 
 ### Implementation
 
-There are few 3rd party implementations, and one of them is [RxFeedback](https://github.com/NoTests/RxFeedback.swift). It's pretty small and we need only half of it, so we can even have our own implementation based on existing ones. You can see examples in the app with the new Home flow and new Services.
+There are few 3rd party implementations, and one of them is [RxFeedback](https://github.com/NoTests/RxFeedback.swift). It's pretty small and we need only half of it, so we can even have our own implementation based on existing ones. You can see examples in the app with the new Whim flow and new Services.
 
-The main idea is that we have 
+The main idea is that we have
 - State: describes overall system state, as we've discussed earlier.
 - Event: denotes something that has already happened and is used to change state.
 - Reducer: state machine that returns new state based on original state and an event, or returns original state if no transition happened. Most of business logic should be here.
-- Feedbacks: feedback is a side-effect defined by a pair of two callbacks: 
+- Feedbacks: feedback is a side-effect defined by a pair of two callbacks:
   - Rrequest: receives state every time it changes and returns part of its data needed to run side effect, or returns nil if no side effect needs to run.
   - Eeffect: receives part of the state returned from the first callback and returns observable of event, which will be used to change state via the state machine.
 
@@ -777,7 +777,7 @@ Reducer is the only one who can change state based on event and feedbacks are th
 └┘          └───────┘          └─────────────┘          └─────────┘
 ```
 
-If it seems unclear at first, don't worry. I will be glad to help you with it, as I've spent last three years slowly going towards similar one.    
+If it seems unclear at first, don't worry. I will be glad to help you with it, as I've spent last three years slowly going towards similar one.
 Please note, that this is the approach that we would eventually come up with sooner or later as it adds nothing new but just organizes our system.
 
 This approach is inspired by [control theory](https://en.wikipedia.org/wiki/Control_theory) (this is where "feedback" comes from) and [Moore state machine](https://en.wikipedia.org/wiki/Moore_machine).
@@ -918,7 +918,7 @@ You can even split it into separate `when` or `then` calls. It might be handy in
 
 - Follow given-when-then or arrange-act-assert pattern
 - Use our `StoreVerification` util for testing feedback-system-based services and stores
-- Use `TestScheduler` from `RxTest` for easy testing time-sensitive and asynchronous logic 
+- Use `TestScheduler` from `RxTest` for easy testing time-sensitive and asynchronous logic
 - Use our custom `XCTest` and `Nimble` matchers for easier assertion of recorded state updates
 
 ## 🔗 References

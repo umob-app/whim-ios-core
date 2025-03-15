@@ -9,7 +9,15 @@ import RxRelay
 
 extension ___VARIABLE_store:identifier___ {
     struct State {
-        static let initial: State = .init()
+        struct Map: Equatable {
+            var isActive: Bool
+
+            static let initial: Map = .init(isActive: false)
+        }
+
+        var map: Map
+
+        static let initial: State = .init(map: .initial)
     }
 }
 
@@ -17,7 +25,9 @@ extension ___VARIABLE_store:identifier___ {
 
 extension ___VARIABLE_store:identifier___ {
     enum Action {
-        case .didTapCloseButton
+        case didBecomeActive(Bool)
+        case didTapCloseButton
+        case map(___VARIABLE_map:identifier___.Action)
     }
 
     enum Event {
@@ -31,6 +41,9 @@ extension ___VARIABLE_store:identifier___.State {
     // swiftlint:disable:next superfluous_disable_command cyclomatic_complexity
     static func reduce(state: inout ___VARIABLE_store:identifier___.State, event: ___VARIABLE_store:identifier___.Event) {
         switch event {
+        case let .action(.didBecomeActive(isActive)):
+            state.map.isActive = isActive
+
         case .action(.didTapCloseButton):
             break
         }

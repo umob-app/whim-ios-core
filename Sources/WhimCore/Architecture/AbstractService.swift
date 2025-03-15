@@ -55,7 +55,6 @@
 ///   var subState: SubState { state.map(\.subState) }
 /// }
 /// ```
-
 open class AbstractService<State, Action> {
     public init() {}
 
