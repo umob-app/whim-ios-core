@@ -9,7 +9,7 @@ enum ___VARIABLE_builder:identifier___ {
     static func make(
         router: @escaping (___VARIABLE_store:identifier___.Route) -> Void
     ) -> WhimSingleScene {
-        let topBar = CloseButtonTopBarViewController()
+        let topBar = WhimTopBarWithCloseButton()
         let bottomSheet = ___VARIABLE_bottom:identifier___(nibName: "___VARIABLE_bottom:identifier___", bundle: nil)
         let store = ___VARIABLE_store:identifier___()
 
@@ -26,7 +26,7 @@ enum ___VARIABLE_builder:identifier___ {
 // MARK: - States & Actions Map
 
 fileprivate extension ___VARIABLE_store:identifier___.Action {
-    init(action: CloseButtonTopBarViewController.Action) {
+    init(action: WhimTopBarWithCloseButton.Action) {
         switch action {
         case .didTapCloseButton: self = .didTapCloseButton
         }

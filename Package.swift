@@ -30,9 +30,6 @@ let package = Package(
                 "RxSwift",
                 .product(name: "RxCocoa", package: "RxSwift"),
                 .product(name: "OrderedCollections", package: "swift-collections"),
-            ],
-            resources: [
-                .process("Resources"),
             ]
         ),
         .testTarget(
