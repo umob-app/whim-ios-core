@@ -12,8 +12,9 @@ final class ___VARIABLE_map:identifier___: WhimScenePresentation {
 
     var output: ___VARIABLE_map:identifier___.Dispatch?
 
+    private let disposeBag = DisposeBag()
     private let mapLayerManager: MapLayerManager<<#Context#>>
-    private let map: (layer: WhimMapLayer, lifetime: MapLayerLifetime)
+    private let map: (layer: MapLayer<<#Context#>>, lifetime: MapLayerLifetime)
 
     private var isActive: Bool = false
 

@@ -11,9 +11,9 @@ enum ___VARIABLE_builder:identifier___ {
     static func make(
         router: @escaping (___VARIABLE_store:identifier___.Route) -> Void
     ) -> WhimSingleScene {
-        let topBar = CloseButtonTopBarViewController()
+        let topBar = WhimTopBarWithCloseButton()
         let bottomSheet = ___VARIABLE_bottom:identifier___(nibName: "___VARIABLE_bottom:identifier___", bundle: nil)
-        let map = ___VARIABLE_map:identifier___(mapLayerManager: World.current.managers.mapLayer)
+        let map = ___VARIABLE_map:identifier___(mapLayerManager: <#MapLayerManager<Context>#>)
         let store = ___VARIABLE_store:identifier___()
 
         store.bind(
@@ -22,7 +22,7 @@ enum ___VARIABLE_builder:identifier___ {
             map: .init(presentation: map, state: ___VARIABLE_map:identifier___.State.init, action: ___VARIABLE_store:identifier___.Action.init),
             router: router
         )
-        _ = bottomSheet.rx.isActive.takeUntil(bottomSheet.rx.deallocated).bind { [weak store] isActive in
+        _ = bottomSheet.rx.isActive.take(until: bottomSheet.rx.deallocated).bind { [weak store] isActive in
             store?.dispatch(.didBecomeActive(isActive))
         }
         return WhimSingleScene(top: topBar, bottom: bottomSheet)
@@ -44,7 +44,7 @@ fileprivate extension ___VARIABLE_store:identifier___.Action {
 }
 
 fileprivate extension ___VARIABLE_store:identifier___.Action {
-    init(action: CloseButtonTopBarViewController.Action) {
+    init(action: WhimTopBarWithCloseButton.Action) {
         switch action {
         case .didTapCloseButton: self = .didTapCloseButton
         }

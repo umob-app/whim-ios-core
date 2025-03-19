@@ -3,8 +3,8 @@ import UIKit
 /// Represents a reloading icon image-view.
 /// Has `style` variable, changing which will render correct state.
 public final class MapReloadSidebarItemView: UIImageView {
-    private static var icon: UIImage? {
-        return WhimCore.image(named: "map-reload-icon")
+    public static var defaultIcon: UIImage {
+        return UIImage(systemName: "arrow.clockwise")!
     }
 
     // sourcery: Random
@@ -22,11 +22,13 @@ public final class MapReloadSidebarItemView: UIImageView {
 
     private var highlightColor: UIColor
     private var normalTintColor: UIColor
+    private var icon: UIImage
 
-    public init(style: Style = .normal, highlightColor: UIColor, normalTintColor: UIColor) {
+    public init(icon: UIImage = MapReloadSidebarItemView.defaultIcon, style: Style = .normal, highlightColor: UIColor, normalTintColor: UIColor) {
         self.style = style
         self.highlightColor = highlightColor
         self.normalTintColor = normalTintColor
+        self.icon = icon
         super.init(frame: .zero)
         contentMode = .center
 
@@ -45,11 +47,11 @@ public final class MapReloadSidebarItemView: UIImageView {
 
         switch style {
         case .normal:
-            image = Self.icon?.withRenderingMode(.alwaysTemplate)
+            image = icon.withRenderingMode(.alwaysTemplate)
             tintColor = normalTintColor
             backgroundColor = .white
         case .highlighted:
-            image = Self.icon?.withRenderingMode(.alwaysTemplate)
+            image = icon.withRenderingMode(.alwaysTemplate)
             tintColor = .white
             backgroundColor = highlightColor
         case .spinning:
@@ -61,7 +63,7 @@ public final class MapReloadSidebarItemView: UIImageView {
             rotation.isRemovedOnCompletion = false
             layer.add(rotation, forKey: "rotationAnimation")
 
-            image = Self.icon?.withRenderingMode(.alwaysTemplate)
+            image = icon.withRenderingMode(.alwaysTemplate)
             tintColor = .white
             backgroundColor = highlightColor
         }
