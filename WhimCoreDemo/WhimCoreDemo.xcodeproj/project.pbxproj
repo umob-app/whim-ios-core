@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E472D9CD2D3A95BD003333FE /* WhimCore in Frameworks */ = {isa = PBXBuildFile; productRef = E472D9CC2D3A95BD003333FE /* WhimCore */; };
+		FA408E5D2D915F7500DF4E9D /* GEOSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA408E5C2D915F7500DF4E9D /* GEOSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -15,7 +16,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E47C05CA2D3A80FA00D05BCC /* WhimCoreDemo */ = {
+		FA408EA02D91644C00DF4E9D /* WhimCoreDemo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = WhimCoreDemo;
 			sourceTree = "<group>";
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA408E5D2D915F7500DF4E9D /* GEOSwift in Frameworks */,
 				E472D9CD2D3A95BD003333FE /* WhimCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -37,7 +39,7 @@
 		E47C05BF2D3A80FA00D05BCC = {
 			isa = PBXGroup;
 			children = (
-				E47C05CA2D3A80FA00D05BCC /* WhimCoreDemo */,
+				FA408EA02D91644C00DF4E9D /* WhimCoreDemo */,
 				E47C05C92D3A80FA00D05BCC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,11 +68,12 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E47C05CA2D3A80FA00D05BCC /* WhimCoreDemo */,
+				FA408EA02D91644C00DF4E9D /* WhimCoreDemo */,
 			);
 			name = WhimCoreDemo;
 			packageProductDependencies = (
 				E472D9CC2D3A95BD003333FE /* WhimCore */,
+				FA408E5C2D915F7500DF4E9D /* GEOSwift */,
 			);
 			productName = WhimCoreDemo;
 			productReference = E47C05C82D3A80FA00D05BCC /* WhimCoreDemo.app */;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				E472D9CB2D3A95BD003333FE /* XCLocalSwiftPackageReference "../../whim-ios-core" */,
+				FA408E5B2D915F7500DF4E9D /* XCRemoteSwiftPackageReference "GEOSwift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E47C05C92D3A80FA00D05BCC /* Products */;
@@ -341,10 +345,26 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		FA408E5B2D915F7500DF4E9D /* XCRemoteSwiftPackageReference "GEOSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GEOSwift/GEOSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		E472D9CC2D3A95BD003333FE /* WhimCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WhimCore;
+		};
+		FA408E5C2D915F7500DF4E9D /* GEOSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA408E5B2D915F7500DF4E9D /* XCRemoteSwiftPackageReference "GEOSwift" */;
+			productName = GEOSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
