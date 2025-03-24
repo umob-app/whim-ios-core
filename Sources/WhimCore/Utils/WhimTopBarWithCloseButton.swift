@@ -10,7 +10,8 @@ public final class WhimTopBarWithCloseButton: WhimScenePresentationViewControlle
     }
 
     public enum UI {
-        public static let padding: CGFloat = 16
+        public static let buttonPadding: CGFloat = 16
+        public static let buttonSize: CGFloat = 48
     }
 
     public var output: WhimTopBarWithCloseButton.Dispatch?
@@ -35,10 +36,10 @@ public final class WhimTopBarWithCloseButton: WhimScenePresentationViewControlle
         view.addSubview(closeButton)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UI.padding),
-            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UI.padding),
-            closeButton.widthAnchor.constraint(equalToConstant: CloseButton.UI.size),
-            closeButton.heightAnchor.constraint(equalToConstant: CloseButton.UI.size),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UI.buttonPadding),
+            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UI.buttonPadding),
+            closeButton.widthAnchor.constraint(equalToConstant: UI.buttonSize),
+            closeButton.heightAnchor.constraint(equalToConstant: UI.buttonSize),
             view.bottomAnchor.constraint(equalTo: closeButton.bottomAnchor)
         ])
 
@@ -52,10 +53,6 @@ public final class WhimTopBarWithCloseButton: WhimScenePresentationViewControlle
 
 /// A button for the default top bar controller, with a user-experience similar to `MapSidebarItemButton`.
 final class CloseButton: UIButton {
-    enum UI {
-        static let size: CGFloat = 48
-    }
-
     override var isHighlighted: Bool {
         didSet {
             subviews.first(where: { $0 is PassthroughView })?.backgroundColor = isHighlighted
@@ -79,7 +76,7 @@ final class CloseButton: UIButton {
         config(size: frame.width)
     }
 
-    private func config(size: CGFloat = UI.size) {
+    private func config(size: CGFloat = WhimTopBarWithCloseButton.UI.buttonSize) {
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
 

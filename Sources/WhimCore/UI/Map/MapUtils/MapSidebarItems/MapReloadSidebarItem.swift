@@ -1,7 +1,7 @@
 import UIKit
 
 /// Represents a reloading icon image-view.
-/// Has `style` variable, changing which will render correct state.
+/// Has `style` variable, changing which will render respective state.
 public final class MapReloadSidebarItemView: UIImageView {
     public static var defaultIcon: UIImage {
         return UIImage(systemName: "arrow.clockwise")!
@@ -39,12 +39,22 @@ public final class MapReloadSidebarItemView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // this is needed to avoid this component to resize based on the symbol it's rendering,
+    // but to size itself precisely according to autolayout requirements.
+    // https://stackoverflow.com/a/78894452/1376429
+    public override var alignmentRectInsets: UIEdgeInsets {
+        .zero
+    }
+
     private func apply(_ style: Style, force: Bool = false) {
         guard self.style != style || force else {
             return
         }
-        layer.removeAllAnimations()
-
+        if #available(iOS 18.0, *) {
+            removeSymbolEffect(ofType: .rotate)
+        } else {
+            layer.removeAllAnimations()
+        }
         switch style {
         case .normal:
             image = icon.withRenderingMode(.alwaysTemplate)
@@ -55,14 +65,17 @@ public final class MapReloadSidebarItemView: UIImageView {
             tintColor = .white
             backgroundColor = highlightColor
         case .spinning:
-            let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
-            rotation.toValue = NSNumber(value: Double.pi * 2)
-            rotation.duration = 2
-            rotation.isCumulative = true
-            rotation.repeatCount = Float.greatestFiniteMagnitude
-            rotation.isRemovedOnCompletion = false
-            layer.add(rotation, forKey: "rotationAnimation")
-
+            if #available(iOS 18.0, *) {
+                addSymbolEffect(.rotate, options: .repeating, animated: true)
+            } else {
+                let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+                rotation.toValue = NSNumber(value: Double.pi * 2)
+                rotation.duration = 2
+                rotation.isCumulative = true
+                rotation.repeatCount = Float.greatestFiniteMagnitude
+                rotation.isRemovedOnCompletion = false
+                layer.add(rotation, forKey: "rotationAnimation")
+            }
             image = icon.withRenderingMode(.alwaysTemplate)
             tintColor = .white
             backgroundColor = highlightColor
