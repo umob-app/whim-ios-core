@@ -1,6 +1,6 @@
 struct ServiceLocator {
     let mapLayerManager: DemoMapLayerManager
-    let worldGeometryService: WorldGeometryService
+    let worldGeometryService: WorldGeometryServing
     // etc...
 }
 

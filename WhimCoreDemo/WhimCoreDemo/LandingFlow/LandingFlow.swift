@@ -29,6 +29,7 @@ private extension LandingFlow {
         let scene = LandingBuilder.make(router: { [weak self] route in
             switch route {
             case .dismiss: self?.router(.dismiss)
+            case let .showDetails(code): self?.router(.navigate(.showDetails(code)))
             }
         })
         push(scene: scene)

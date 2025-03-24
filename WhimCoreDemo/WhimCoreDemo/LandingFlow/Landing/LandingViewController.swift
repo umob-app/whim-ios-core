@@ -39,19 +39,55 @@ final class LandingViewController: UIViewController, WhimScenePresentation, Bott
         ]
     }
 
-    private let topView = UIView()
+    private let topView = UIImageView()
     private let tableView = UITableView()
     private let reuseId = "LandingViewControllerCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        topView.backgroundColor = .purple
+        setupView()
+        setupTopView()
+        setupTableView()
 
-        view.addSubview(topView)
-        view.addSubview(tableView)
+        tableView.reloadData()
+    }
 
+    private func setupView() {
+        view.backgroundColor = .white
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.25
+        view.layer.shadowRadius = 2
+        view.layer.shadowOffset = CGSize(width: 0, height: -1)
+        view.layer.cornerRadius = 4
+    }
+
+    private func setupTopView() {
         topView.translatesAutoresizingMaskIntoConstraints = false
+        topView.image = UIImage(systemName: "line.3.horizontal")!
+        topView.contentMode = .center
+        topView.tintColor = .lightGray
+
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor = .separator
+
+        topView.addSubview(separator)
+        view.addSubview(topView)
+        NSLayoutConstraint.activate([
+            topView.topAnchor.constraint(equalTo: view.topAnchor),
+            topView.heightAnchor.constraint(equalToConstant: UI.topViewHeight),
+            topView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+
+            separator.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
+            separator.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
+            separator.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
+            separator.heightAnchor.constraint(equalToConstant: 1),
+        ])
+    }
+
+    private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.estimatedRowHeight = 35
         tableView.estimatedSectionHeaderHeight = 50
@@ -60,19 +96,13 @@ final class LandingViewController: UIViewController, WhimScenePresentation, Bott
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseId)
 
+        view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            topView.topAnchor.constraint(equalTo: view.topAnchor),
-            topView.heightAnchor.constraint(equalToConstant: UI.topViewHeight),
-            topView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-
             tableView.topAnchor.constraint(equalTo: topView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
-        tableView.reloadData()
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -101,6 +131,9 @@ final class LandingViewController: UIViewController, WhimScenePresentation, Bott
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if let country = state.countries.value?.elements[indexPath.section].value[indexPath.row] {
+            dispatch(.didSelectCountry(country))
+        }
     }
 
     func render(state newState: State) {

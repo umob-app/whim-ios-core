@@ -9,7 +9,8 @@ import OrderedCollections
 extension LandingStore {
     struct State: Equatable {
         struct CountryInfo: Equatable {
-            var name: String
+            var code: CountryCode
+            var name: CountryName
             var flag: String
         }
 
@@ -21,7 +22,7 @@ extension LandingStore {
         }
 
         var map: Map
-        var countries: DemoLoadingStatus<OrderedDictionary<String, [CountryInfo]>>
+        var countries: DemoLoadingStatus<OrderedDictionary<Continent, [CountryInfo]>>
 
         static let initial: State = .init(map: .initial, countries: .initial)
     }
@@ -33,6 +34,7 @@ extension LandingStore {
     enum Action {
         case didBecomeActive(Bool)
         case didTapCloseButton
+        case didSelectCountry(State.CountryInfo)
         case map(LandingMap.Action)
     }
 
@@ -55,8 +57,8 @@ extension LandingStore.State {
             state.countries = countriesStatus.map { countries in
                 countries.elements
                     .reduce(into: [:]) { acc, keyValue in
-                        let (name, info) = keyValue
-                        acc[info.continent, default: []].append(CountryInfo(name: name, code: info.code))
+                        let (code, info) = keyValue
+                        acc[info.continent, default: []].append(CountryInfo(name: info.name, code: code))
                     }
             }
             state.map.loadingStyle = switch countriesStatus {
@@ -64,6 +66,9 @@ extension LandingStore.State {
                 case .loaded: .normal
                 case .failed: .highlighted
             }
+
+        case .action(.didSelectCountry):
+            break
 
         case .action(.map(.reloadCountries)):
             break
@@ -89,6 +94,9 @@ final class LandingStore: WhimSceneStore {
             switch event {
             case .action(.didTapCloseButton):
                 return .dismiss
+
+            case let .action(.didSelectCountry(info)):
+                return .showDetails(info.code)
 
             default:
                 return nil
@@ -140,6 +148,7 @@ fileprivate extension LandingStore {
 extension LandingStore {
     enum Route {
         case dismiss
+        case showDetails(CountryCode)
     }
 }
 
@@ -150,7 +159,7 @@ extension LandingStore.State.CountryInfo {
         "\(flag) \(name)"
     }
 
-    init(name: WorldGeometryService.State.CountryName, code: WorldGeometryService.State.CountryCode) {
+    init(name: CountryName, code: CountryCode) {
         let baseFlagScalar: UInt32 = 127397
         var flagString = ""
         for scalarValue in code.uppercased().unicodeScalars {
@@ -161,5 +170,6 @@ extension LandingStore.State.CountryInfo {
         }
         self.flag = flagString
         self.name = name
+        self.code = code
     }
 }

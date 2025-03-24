@@ -10,13 +10,10 @@ import OrderedCollections
 
 extension WorldGeometryService {
     struct State {
-        typealias CountryName = String
-        typealias CountryCode = String
-        typealias Countries = OrderedDictionary<CountryName, CountryGeometryInfo>
+        typealias Countries = OrderedDictionary<CountryCode, CountryGeometryInfo>
 
         struct CountryGeometryInfo: Equatable {
-            /// iso 3166-1-alpha-2 code
-            var code: CountryCode
+            var name: CountryName
             var coordinate: CLLocationCoordinate2D
             var continent: String
             var geometry: Geometry
@@ -65,13 +62,13 @@ extension WorldGeometryService.State {
                     if let properties = feature.properties,
                        let geometry = feature.geometry,
                        case let .string(countryName) = properties["name"],
-                       case let .string(code) = properties["iso_3166_1_alpha_2_codes"],
+                       case let .string(countryCode) = properties["iso_3166_1_alpha_2_codes"],
                        case let .string(continent) = properties["continent"],
                        case let .object(point) = properties["geo_point_2d"],
                        case let .number(lat) = point["lat"], case let .number(lon) = point["lon"]
                     {
-                        acc[countryName] = .init(
-                            code: code,
+                        acc[countryCode] = .init(
+                            name: countryName,
                             coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon),
                             continent: continent,
                             geometry: geometry
@@ -79,15 +76,16 @@ extension WorldGeometryService.State {
                     }
                 })
             }
-            if Bool.random() {
-                if Bool.random() {
-                    state.countries.finish(with: result)
-                } else {
-                    state.countries.finish(with: .success([:]))
-                }
-            } else {
-                state.countries.finish(with: .failure(.geo(.missingResource)))
-            }
+            state.countries.finish(with: result)
+//            if Bool.random() {
+//                if Bool.random() {
+//                    state.countries.finish(with: result)
+//                } else {
+//                    state.countries.finish(with: .success([:]))
+//                }
+//            } else {
+//                state.countries.finish(with: .failure(.geo(.missingResource)))
+//            }
         }
     }
 }
@@ -126,6 +124,7 @@ final class WorldGeometryService: WorldGeometryServing {
 fileprivate extension WorldGeometryService {
      static func fetchCountries(scheduler: SchedulerType) -> Feedback<State, Event> {
          .whenBecomesTrue(state: \.countries.isLoading) { _ in
+             // geojson resource taken from: https://public.opendatasoft.com/explore/dataset/country_shapes/information/
              guard let geoURL = Bundle.main.url(forResource: "world", withExtension: "geojson"), let data = try? Data(contentsOf: geoURL) else {
                  return .just(.didFetchCountries(.failure(.geo(.missingResource)))).delay(.seconds(1), scheduler: scheduler)
              }

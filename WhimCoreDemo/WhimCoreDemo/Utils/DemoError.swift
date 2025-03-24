@@ -4,6 +4,7 @@ enum DemoError: Error, Equatable, Hashable {
     enum GeoJSON: Equatable, Hashable {
         case missingResource
         case wrongFormat
+        case dataUnavailable
     }
 
     case geo(GeoJSON)

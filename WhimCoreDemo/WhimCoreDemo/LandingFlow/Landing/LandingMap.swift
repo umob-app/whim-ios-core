@@ -20,7 +20,7 @@ final class LandingMap: WhimScenePresentation {
 
     init(mapLayerManager: DemoMapLayerManager) {
         self.mapLayerManager = mapLayerManager
-        self.map = mapLayerManager.registerNewLayer()
+        self.map = mapLayerManager.registerNewLayer(with: .landing)
 
         setupMapLayer()
     }
@@ -53,7 +53,9 @@ final class LandingMap: WhimScenePresentation {
             return
         }
         if isActive {
-            mapLayerManager.requestControlForLayer(with: map.layer.token)
+            mapLayerManager.requestControlForLayer(with: map.layer.token) { ctx in
+                return .none
+            }
         } else {
             mapLayerManager.relinquishControlForLayer(with: map.layer.token)
         }

@@ -172,11 +172,13 @@ fileprivate extension HomeFlow {
     // swiftlint:disable:next cyclomatic_complexity
     private static func scene(for link: HomeFlowRoute.NavigationLink, dispatch: @escaping (HomeFlow.Event) -> Void) -> WhimScene? {
         let router: HomeFlowRouter = { dispatch(.action(.route($0))) }
-        switch link {
+        return switch link {
         case .showOnboarding:
-            return LandingFlowBuilder.make(intent: .onboarding, router: router)
+            LandingFlowBuilder.make(intent: .onboarding, router: router)
         case .showLanding:
-            return LandingFlowBuilder.make(intent: .landing, router: router)
+            LandingFlowBuilder.make(intent: .landing, router: router)
+        case let .showDetails(code):
+            DetailsFlowBuilder.make(intent: DetailsFlowIntent(countryCode: code), router: router)
         }
     }
 
@@ -194,6 +196,8 @@ fileprivate extension HomeFlow {
 
 // MARK: - Route
 
+typealias HomeFlowRouter = (HomeFlowRoute) -> Void
+
 enum HomeFlowRoute: Equatable {
     enum NavigationLink: Equatable {
         static var initial: NavigationLink {
@@ -202,7 +206,7 @@ enum HomeFlowRoute: Equatable {
 
         case showOnboarding
         case showLanding
-//        case showDetails
+        case showDetails(CountryCode)
     }
 
     case popToRoot
@@ -210,5 +214,3 @@ enum HomeFlowRoute: Equatable {
     case handleDeeplink(URL)
     case navigate(NavigationLink)
 }
-
-typealias HomeFlowRouter = (HomeFlowRoute) -> Void
