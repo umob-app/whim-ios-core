@@ -10,8 +10,8 @@ enum DetailsBuilder {
         countryCode: CountryCode,
         router: @escaping (DetailsStore.Route) -> Void
     ) -> WhimSingleScene {
-        let topBar = WhimTopBarWithCloseButton()
-        let bottomSheet = DetailsViewController(nibName: "DetailsViewController", bundle: nil)
+        let topBar = WhimTopBarWithButton()
+        let bottomSheet = DetailsViewController()
         let map = DetailsMap(mapLayerManager: ServiceLocator.current.mapLayerManager)
         let store = DetailsStore(
             countryCode: countryCode,
@@ -46,9 +46,9 @@ fileprivate extension DetailsStore.Action {
 }
 
 fileprivate extension DetailsStore.Action {
-    init(action: WhimTopBarWithCloseButton.Action) {
+    init(action: WhimTopBarWithButton.Action) {
         switch action {
-        case .didTapCloseButton: self = .didTapCloseButton
+        case .didTapTopBarButton: self = .didTapCloseButton
         }
     }
 }

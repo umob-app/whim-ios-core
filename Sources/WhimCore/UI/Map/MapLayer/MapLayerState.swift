@@ -348,6 +348,10 @@ extension MapSidebarItem {
         .custom(.init(id: id, content: .view(view)))
     }
 
+    public static var trackUser: MapSidebarItem {
+        .trackUser(highlightedContent: nil, normalContent: nil)
+    }
+
     public static func filter(isHighlighted: Bool) -> MapSidebarItem {
         .filter(highlightedContent: nil, normalContent: nil, isHighlighted: isHighlighted)
     }

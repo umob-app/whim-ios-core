@@ -15,7 +15,8 @@ extension WorldGeometryService {
         struct CountryGeometryInfo: Equatable {
             var name: CountryName
             var coordinate: CLLocationCoordinate2D
-            var continent: String
+            var continent: Continent
+            var region: CountryRegion
             var geometry: Geometry
         }
 
@@ -64,6 +65,7 @@ extension WorldGeometryService.State {
                        case let .string(countryName) = properties["name"],
                        case let .string(countryCode) = properties["iso_3166_1_alpha_2_codes"],
                        case let .string(continent) = properties["continent"],
+                       case let .string(region) = properties["region"],
                        case let .object(point) = properties["geo_point_2d"],
                        case let .number(lat) = point["lat"], case let .number(lon) = point["lon"]
                     {
@@ -71,6 +73,7 @@ extension WorldGeometryService.State {
                             name: countryName,
                             coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon),
                             continent: continent,
+                            region: region,
                             geometry: geometry
                         )
                     }

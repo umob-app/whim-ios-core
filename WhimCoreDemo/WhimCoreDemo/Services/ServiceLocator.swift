@@ -1,5 +1,6 @@
 struct ServiceLocator {
     let mapLayerManager: DemoMapLayerManager
+    let userLocationService: UserLocationServing
     let worldGeometryService: WorldGeometryServing
     // etc...
 }
@@ -26,6 +27,7 @@ extension ServiceLocator {
     static func create() -> ServiceLocator {
         ServiceLocator(
             mapLayerManager: DemoMapLayerManager(),
+            userLocationService: UserLocationService(),
             worldGeometryService: WorldGeometryService()
         )
     }

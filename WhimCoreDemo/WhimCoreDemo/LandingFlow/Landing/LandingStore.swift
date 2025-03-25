@@ -160,15 +160,7 @@ extension LandingStore.State.CountryInfo {
     }
 
     init(name: CountryName, code: CountryCode) {
-        let baseFlagScalar: UInt32 = 127397
-        var flagString = ""
-        for scalarValue in code.uppercased().unicodeScalars {
-            guard let scalar = UnicodeScalar(baseFlagScalar + scalarValue.value) else {
-                continue
-            }
-            flagString.unicodeScalars.append(scalar)
-        }
-        self.flag = flagString
+        self.flag = countryFlag(from: code)
         self.name = name
         self.code = code
     }

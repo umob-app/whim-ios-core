@@ -6,7 +6,6 @@ final class LandingViewController: UIViewController, WhimScenePresentation, Bott
     typealias Action = LandingStore.Action
 
     enum UI {
-        static let topViewHeight: CGFloat = 40
         static let sectionHeight: CGFloat = 50
         static let rowHeight: CGFloat = 35
 
@@ -35,11 +34,11 @@ final class LandingViewController: UIViewController, WhimScenePresentation, Bott
         let safeAreaInsets = view.superview?.safeAreaInsets ?? view.safeAreaInsets
         return [
             // 1 is for button shadow offset
-            .fromTop(.points(WhimTopBarWithCloseButton.UI.buttonPadding - 1 + safeAreaInsets.top)),
+            .fromTop(.points(WhimTopBarWithButton.UI.buttonPadding - 1 + safeAreaInsets.top)),
         ]
     }
 
-    private let topView = UIImageView()
+    private let topView = TopView()
     private let tableView = UITableView()
     private let reuseId = "LandingViewControllerCell"
 
@@ -63,27 +62,11 @@ final class LandingViewController: UIViewController, WhimScenePresentation, Bott
     }
 
     private func setupTopView() {
-        topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.image = UIImage(systemName: "line.3.horizontal")!
-        topView.contentMode = .center
-        topView.tintColor = .lightGray
-
-        let separator = UIView()
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = .separator
-
-        topView.addSubview(separator)
         view.addSubview(topView)
         NSLayoutConstraint.activate([
             topView.topAnchor.constraint(equalTo: view.topAnchor),
-            topView.heightAnchor.constraint(equalToConstant: UI.topViewHeight),
             topView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-
-            separator.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
-            separator.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
-            separator.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 1),
         ])
     }
 

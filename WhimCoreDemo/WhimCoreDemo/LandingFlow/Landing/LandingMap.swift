@@ -27,7 +27,7 @@ final class LandingMap: WhimScenePresentation {
 
     private func setupMapLayer() {
         map.layer.sidebar = [
-            .trackUser(highlightedContent: nil, normalContent: nil),
+            .trackUser,
             .reloadNormal(highlightColor: .systemBlue, normalTintColor: .systemBlue),
             .filter(isHighlighted: true)
         ]
@@ -39,9 +39,9 @@ final class LandingMap: WhimScenePresentation {
             .disposed(by: disposeBag)
     }
 
-    func render(state: State) {
-        applyActiveState(state.isActive)
-        applyLoadingStyle(state.loadingStyle)
+    func render(state newState: State) {
+        applyActiveState(newState.isActive)
+        applyLoadingStyle(newState.loadingStyle)
     }
 
     private func applyLoadingStyle(_ loadingStyle: MapReloadSidebarItemView.Style) {

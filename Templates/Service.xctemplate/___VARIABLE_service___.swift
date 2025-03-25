@@ -42,9 +42,7 @@ final class ___VARIABLE_service:identifier___: ___VARIABLE_serving:identifier___
     private let system: FeedbackSystem<State, Event>
     private let actions = PublishRelay<Action>()
 
-    override var state: ObservableProperty<State> {
-        return system.state
-    }
+    override var state: ObservableProperty<State> { system.state }
 
     init(
         scheduler: SchedulerType = SerialDispatchQueueScheduler(qos: .userInitiated, internalSerialQueueName: "com.whim.___VARIABLE_service:identifier___")

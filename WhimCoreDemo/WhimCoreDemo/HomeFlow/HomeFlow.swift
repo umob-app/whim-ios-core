@@ -8,6 +8,7 @@ import WhimCore
 enum HomeFlowBuilder {
     static func make() -> HomeFlow {
         HomeFlow(
+            userLocationService: ServiceLocator.current.userLocationService,
             worldGeometryService: ServiceLocator.current.worldGeometryService
         )
     }
@@ -75,6 +76,7 @@ final class HomeFlow {
 
     init(
         scheduler: SchedulerType = MainScheduler.instance,
+        userLocationService: UserLocationServing,
         worldGeometryService: WorldGeometryServing
     ) {
         stack = WhimSceneNavigationStack([])
@@ -84,7 +86,7 @@ final class HomeFlow {
             reduce: State.reduce,
             feedbacks: [
                 .just(effects: actions.map(Event.action)),
-                Self.startServices(worldGeometryService: worldGeometryService),
+                Self.startServices(userLocationService: userLocationService, worldGeometryService: worldGeometryService),
                 Self.handleNavigation(stack: stack),
             ]
         )
@@ -99,9 +101,11 @@ final class HomeFlow {
 
 fileprivate extension HomeFlow {
     static func startServices(
+        userLocationService: UserLocationServing,
         worldGeometryService: WorldGeometryServing
     ) -> Feedback<State, Event> {
-        .whenBecomesTrue(state: \.isLoaded) { [weak worldGeometryService] _ in
+        .whenBecomesTrue(state: \.isLoaded) { [weak userLocationService, weak worldGeometryService] _ in
+            userLocationService?.dispatch(.start)
             worldGeometryService?.dispatch(.start)
             return .empty()
         }

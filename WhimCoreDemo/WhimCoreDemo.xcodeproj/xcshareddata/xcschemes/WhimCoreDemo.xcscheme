@@ -51,7 +51,7 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <LocationScenarioReference
-         identifier = "../../WhimCoreDemo/Helsinki.gpx"
+         identifier = "../../WhimCoreDemo/Resources/Helsinki.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>

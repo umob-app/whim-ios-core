@@ -15,9 +15,22 @@
 		E47C05C82D3A80FA00D05BCC /* WhimCoreDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhimCoreDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FAEBFDE32D9362D9006FD57E /* Exceptions for "WhimCoreDemo" folder in "WhimCoreDemo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E47C05C72D3A80FA00D05BCC /* WhimCoreDemo */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FA408EA02D91644C00DF4E9D /* WhimCoreDemo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FAEBFDE32D9362D9006FD57E /* Exceptions for "WhimCoreDemo" folder in "WhimCoreDemo" target */,
+			);
 			path = WhimCoreDemo;
 			sourceTree = "<group>";
 		};
@@ -147,7 +160,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = WhimCoreDemo/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used for demo purposes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
@@ -176,7 +190,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = WhimCoreDemo/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used for demo purposes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;

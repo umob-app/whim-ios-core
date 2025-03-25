@@ -8,9 +8,11 @@ import CoreLocation
 // MARK: - State
 
 extension DetailsStore {
-    struct State {
+    struct State: Equatable {
         struct CountryInfo: Equatable {
             var name: CountryName
+            var region: CountryRegion
+            var flag: String
             var coordinate: CLLocationCoordinate2D
             var geometry: Geometry
         }
@@ -18,6 +20,7 @@ extension DetailsStore {
         struct Map: Equatable {
             var isActive: Bool
             var country: DemoLoadingStatus<CountryInfo>
+            var visibleCoordinate: CLLocationCoordinate2D?
 
             static let initial: Map = .init(isActive: false, country: .initial)
         }
@@ -37,6 +40,7 @@ extension DetailsStore {
     enum Action {
         case didBecomeActive(Bool)
         case didTapCloseButton
+        case didTapOnCountryInfo
         case map(DetailsMap.Action)
     }
 
@@ -58,7 +62,13 @@ extension DetailsStore.State {
         case let .didUpdateCountries(countriesStatus):
             let countryStatus = countriesStatus.compactMap { countries in
                 countries[state.countryCode].map {
-                    CountryInfo(name: $0.name, coordinate: $0.coordinate, geometry: $0.geometry)
+                    CountryInfo(
+                        name: $0.name,
+                        region: $0.region,
+                        flag: countryFlag(from: state.countryCode),
+                        coordinate: $0.coordinate,
+                        geometry: $0.geometry
+                    )
                 }
             }
             if let countryStatus {
@@ -66,6 +76,12 @@ extension DetailsStore.State {
             } else {
                 state.map.country.finish(with: .failure(.geo(.dataUnavailable)))
             }
+
+        case .action(.didTapOnCountryInfo):
+            state.map.visibleCoordinate = state.map.country.value?.coordinate
+
+        case let .action(.map(.didUpdateVisibleCoordinate(coordinate))):
+            state.map.visibleCoordinate = coordinate
 
         case .action(.didTapCloseButton):
             break

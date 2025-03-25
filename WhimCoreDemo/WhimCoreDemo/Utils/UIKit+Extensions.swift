@@ -17,9 +17,9 @@ extension UIViewController {
         }
         let toastLabel = UILabel(frame: CGRect(
             x: hostView.frame.size.width / 2 - 125,
-            y: hostView.safeAreaInsets.top + WhimTopBarWithCloseButton.UI.buttonPadding,
+            y: hostView.safeAreaInsets.top + WhimTopBarWithButton.UI.buttonPadding,
             width: 250,
-            height: WhimTopBarWithCloseButton.UI.buttonSize
+            height: WhimTopBarWithButton.UI.buttonSize
         ))
         toastLabel.numberOfLines = 2
         toastLabel.backgroundColor = background

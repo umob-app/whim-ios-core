@@ -1,12 +1,12 @@
 import UIKit
 import WhimCore
 
-/// Default implementation of Top Bar Controller with a close button.
-public final class WhimTopBarWithCloseButton: WhimScenePresentationViewController {
+/// Default implementation of Top Bar Controller with a button.
+public final class WhimTopBarWithButton: WhimScenePresentationViewController {
     public typealias State = Void
 
     public enum Action {
-        case didTapCloseButton
+        case didTapTopBarButton
     }
 
     public enum UI {
@@ -14,10 +14,19 @@ public final class WhimTopBarWithCloseButton: WhimScenePresentationViewControlle
         public static let buttonSize: CGFloat = 48
     }
 
-    public var output: WhimTopBarWithCloseButton.Dispatch?
+    public var output: WhimTopBarWithButton.Dispatch?
 
-    private let closeButton = CloseButton()
+    private let topBarButton = TopBarButton()
 
+    public init(icon: UIImage = UIImage(systemName: "xmark")!) {
+        super.init(nibName: nil, bundle: nil)
+        topBarButton.setImage(icon, for: .normal)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,26 +42,26 @@ public final class WhimTopBarWithCloseButton: WhimScenePresentationViewControlle
     private func setupUI() {
         view.backgroundColor = .clear
 
-        view.addSubview(closeButton)
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(topBarButton)
+        topBarButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UI.buttonPadding),
-            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UI.buttonPadding),
-            closeButton.widthAnchor.constraint(equalToConstant: UI.buttonSize),
-            closeButton.heightAnchor.constraint(equalToConstant: UI.buttonSize),
-            view.bottomAnchor.constraint(equalTo: closeButton.bottomAnchor)
+            topBarButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UI.buttonPadding),
+            topBarButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UI.buttonPadding),
+            topBarButton.widthAnchor.constraint(equalToConstant: UI.buttonSize),
+            topBarButton.heightAnchor.constraint(equalToConstant: UI.buttonSize),
+            view.bottomAnchor.constraint(equalTo: topBarButton.bottomAnchor)
         ])
 
-        closeButton.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
+        topBarButton.addTarget(self, action: #selector(topButtonDidTap), for: .touchUpInside)
     }
 
-    @objc private func closeButtonDidTap() {
-        dispatch(.didTapCloseButton)
+    @objc private func topButtonDidTap() {
+        dispatch(.didTapTopBarButton)
     }
 }
 
 /// A button for the default top bar controller, with a user-experience similar to `MapSidebarItemButton`.
-final class CloseButton: UIButton {
+final class TopBarButton: UIButton {
     override var isHighlighted: Bool {
         didSet {
             subviews.first(where: { $0 is PassthroughView })?.backgroundColor = isHighlighted
@@ -76,7 +85,7 @@ final class CloseButton: UIButton {
         config(size: frame.width)
     }
 
-    private func config(size: CGFloat = WhimTopBarWithCloseButton.UI.buttonSize) {
+    private func config(size: CGFloat = WhimTopBarWithButton.UI.buttonSize) {
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
 

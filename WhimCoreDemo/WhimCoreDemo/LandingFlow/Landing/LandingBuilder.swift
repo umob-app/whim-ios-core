@@ -9,7 +9,7 @@ enum LandingBuilder {
     static func make(
         router: @escaping (LandingStore.Route) -> Void
     ) -> WhimSingleScene {
-        let topBar = WhimTopBarWithCloseButton()
+        let topBar = WhimTopBarWithButton(icon: UIImage(systemName: "globe.europe.africa")!)
         let bottomSheet = LandingViewController()
         let map = LandingMap(mapLayerManager: ServiceLocator.current.mapLayerManager)
         let store = LandingStore(worldGeometryService: ServiceLocator.current.worldGeometryService)
@@ -42,9 +42,9 @@ fileprivate extension LandingStore.Action {
 }
 
 fileprivate extension LandingStore.Action {
-    init(action: WhimTopBarWithCloseButton.Action) {
+    init(action: WhimTopBarWithButton.Action) {
         switch action {
-        case .didTapCloseButton: self = .didTapCloseButton
+        case .didTapTopBarButton: self = .didTapCloseButton
         }
     }
 }
