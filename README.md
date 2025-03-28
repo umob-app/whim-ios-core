@@ -3,15 +3,25 @@
 
 Core utilities and architecture components for iOS applications.
 
-- Whim Architecture Tools
+- Whim Architecture & UI Tools
 - User Flow Navigation
 - Abstract Shared Map
+- Geo Hash & Caching + Proximity Hash
 - Sliding Bottom Panel
+- Testing Tools
 - Xcode Templates
 
 ## Documentation
 
-- [Architecture](Documents/ARCHITECTURE.md)
+- Architecture
+  - [Feedback System](Documents/Architecture/FeedbackSystem.md)
+  - [UI](Documents/Architecture/UI.md)
+- [Navigation](Documents/Navigation/Navigation.md)
+- [Map](Documents/Navigation/Map.md)
+
+## Demo Project
+
+Run the `WhimCoreDemo/WhimCoreDemo.xcodeproj` project in your Xcode, no additional setup is needed. It is using SPM for extra dependencies, it is intended mostly for exploration and better showcasing of the tools.
 
 ## Requirements
 
