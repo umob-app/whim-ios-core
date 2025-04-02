@@ -13,11 +13,10 @@ Core utilities and architecture components for iOS applications.
 
 ## Documentation
 
-- Architecture
-  - [Feedback System](Documents/Architecture/FeedbackSystem.md)
-  - [UI](Documents/Architecture/UI.md)
-- [Navigation](Documents/Navigation/Navigation.md)
-- [Map](Documents/Navigation/Map.md)
+- [Architecture](Sources/WhimCore/Documentation.docc/Architecture.md)
+- [UI](Sources/WhimCore/Documentation.docc/UI.md)
+- [Navigation](Sources/WhimCore/Documentation.docc/Navigation.md)
+- [Map](Sources/WhimCore/Documentation.docc/Map.md)
 
 ## Demo Project
 

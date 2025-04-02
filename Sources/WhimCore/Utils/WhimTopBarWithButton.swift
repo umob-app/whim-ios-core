@@ -1,5 +1,4 @@
 import UIKit
-import WhimCore
 
 /// Default implementation of Top Bar Controller with a button.
 public final class WhimTopBarWithButton: WhimScenePresentationViewController {

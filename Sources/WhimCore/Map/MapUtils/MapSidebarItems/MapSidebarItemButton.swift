@@ -1,7 +1,7 @@
 import UIKit
 
 /// A button that is used to render map sidebar menu item with any given content.
-final public class MapSidebarItemButton: UIButton {
+public final class MapSidebarItemButton: UIButton {
     public let item: MapSidebarItem
 
     required public init(item: MapSidebarItem) {

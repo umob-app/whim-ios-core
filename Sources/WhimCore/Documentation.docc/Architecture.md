@@ -1,6 +1,14 @@
-# 🏛 WhimCore Architecture
+# 🏛️ Architecture
 
-## ⚙ Feedback System
+A unidirectional Fedback Loop System that allows describing business logic driven by State.
+
+## Overview
+
+In this article we're talking about unidirectional architectural approach to structuring state, business logic and side effects.
+
+---
+
+### ⚙️ Feedback System
 
 Architecture tooling is based around a Feedback Loop idea.
 It's a structured approach to having a unidirectional system with a state machine, side effects and a declarative way of describing when and what should be done.
@@ -87,7 +95,9 @@ final class AuthService {
 }
 ```
 
-## 🚦 State
+---
+
+### 🚦 State
 
 Let's talk about State organization.
 There's a lot of material on how to organize your State in a safe way to avoid invalid invariants and gain compiler safety, so we won't go deep into that here.
@@ -171,7 +181,9 @@ system = FeedbackSystem(
 )
 ```
 
-## 🐞 Testing
+---
+
+### 🧑‍🔬 Testing
 
 Testing with feedback-system is pretty easy. There's `StoreVerification` utility which helps to setup any service or store based on feedback-system with test-scheduler.
 It follows [given-when-then](https://martinfowler.com/bliki/GivenWhenThen.html) or [arrange-act-assert](https://wiki.c2.com/?ArrangeActAssert) pattern for describing unit-test.
@@ -221,11 +233,22 @@ You receive all recorded events with state updates in `then` block. Event is bas
 You can call `verify` block multiple times to test different behavior, but be aware that each verification you perform on a single instance of `StoreVerification` will continue from where previous one left off, as it's using still the same service and virtual timer.
 You can even split it into separate `when` or `then` calls. It might be handy in `Quick` tests, where you can have nested contexts, and each adds some behavior using `when` block.
 
-## 🔗 References
+---
+
+### 🔗 References
 
 - [Algebraic Data Types](https://www.pointfree.co/episodes/ep4-algebraic-data-types)
 - [Elm](https://guide.elm-lang.org/architecture/), [Redux](https://redux.js.org/introduction/motivation), [Flux](http://blog.benjamin-encz.de/post/real-world-flux-ios/)
 - [RxFeedback](https://academy.realm.io/posts/try-swift-nyc-2017-krunoslav-zaher-modern-rxswift-architectures/)
 - [ReactiveFeedback](https://ilya.puchka.me/implementing-features-with-reactivefeedback/)
+- [ReactiveCocoa/Loop](https://github.com/ReactiveCocoa/Loop)
+- [Trafi/States](https://github.com/trafi/states)
 - [Testing with Rx](https://www.raywenderlich.com/7408-testing-your-rxswift-code)
 - [Protocol and Value Oriented Programming in UIKit Apps](https://developer.apple.com/videos/play/wwdc2016/419)
+
+## Topics
+
+- ``Feedback``
+- ``FeedbackSystem``
+- ``AbstractService``
+- ``ObservableProperty``

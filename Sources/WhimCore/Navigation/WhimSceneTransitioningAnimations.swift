@@ -90,6 +90,7 @@ extension WhimSceneAnimatedTransitions {
     /// Complex modal presentation with multiple modes respecting all supported whim-scene-view-controller variations.
     ///
     /// Here's a scheme describing transitions of different variations for different modes:
+    /// ```
     /// 🁣 - multipart;
     /// 🁢 - fullscreen;
     /// ↑/↓ - slides up/down;
@@ -109,7 +110,7 @@ extension WhimSceneAnimatedTransitions {
     /// ↑   ↓     ↑        ↓   ↓     ↓
     /// 🁣 → 🁣     🁣 → 🁢     🁢 → 🁣     🁢 → 🁢
     /// ↓   ↑     ↓  ↑         ↑         ↑
-    ///
+    /// ```
     public struct Modal: WhimSceneAnimatedTransitioning {
         public enum Mode: Equatable {
             case present, dismiss, swap

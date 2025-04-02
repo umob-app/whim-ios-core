@@ -1,6 +1,8 @@
-# 🖼️ WhimCore UI
+# 🖼️ UI
 
-## ✏️ UI Architecture
+A set of components to aid structuring logic in unidirectional manner when building UI.
+
+## Overview
 
 Idea of splitting UI from its respective logic is not new, so we won't go deep in it here.
 
@@ -27,7 +29,7 @@ It is up to a presentation component to figure out how to perform rendering - ei
 
 ### WhimSceneStore
 
-Store has the same idea as Service from the [FeedbackSystem.md](FeedbackSystem.md) document.
+Store has the same idea as Service from the <doc:Architecture> document.
 ```swift
 protocol WhimSceneStore: AnyObject {
   associatedtype State
@@ -54,3 +56,11 @@ And the reason routes belong to the Store, is that Store owns the business logic
 ### WhimSceneBinding
 
 Bindings is a utility that binds Store's state updates to Presentation's rendering, and Presentation's output actions to Store's dispatch method.
+
+## Topics
+
+- ``WhimScenePresentation``
+- ``WhimSceneStore``
+- ``WhimSceneBinding``
+- ``WhimScenePresentationViewController``
+- ``NonePresentation``

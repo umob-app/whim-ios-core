@@ -5,7 +5,7 @@
 ///
 /// It has no impact on existing OptionSet usage.
 ///
-/// Inspired by: https://nshipster.com/optionset/#a-fresh-take-on-an-old-classic
+/// Inspired by: [NSHipster OptionSet-Option](https://nshipster.com/optionset/#a-fresh-take-on-an-old-classic)
 public protocol Option: RawRepresentable, Hashable, CaseIterable {}
 
 extension Set where Element: Option {

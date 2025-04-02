@@ -22,6 +22,8 @@ let package = Package(
         .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "9.0.0")),
         .package(url: "https://github.com/stanfy/SwiftyMock.git", branch: "spm"),
         .package(url: "https://github.com/maasglobal/whim-ios-random.git", branch: "main"),
+        // Other
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
     ],
     targets: [
         .target(

@@ -6,15 +6,6 @@ import RxRelay
 
 /// Unidirectional Reactive Architecture.
 ///
-/// Feedback Loop System implementation inspired by:
-/// - [RxFeedback](https://github.com/NoTests/RxFeedback.swift)
-/// - [ReactiveFeedback](https://github.com/babylonhealth/ReactiveFeedback)
-/// - [ReactiveCocoa/Loop](https://github.com/ReactiveCocoa/Loop)
-/// - [CombineFeedback](https://github.com/sergdort/CombineFeedback)
-///
-/// More links:
-///  - [Trafi/States](https://github.com/trafi/states)
-///
 /// The intention to build custom implementation was to be closer to the ReactiveFeedback (now Loop) and CombineFeedback
 /// as these implementations are more actively supported and should allow easier transition to Combine in the future.
 ///

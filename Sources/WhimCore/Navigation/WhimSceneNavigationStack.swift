@@ -45,17 +45,21 @@ open class WhimSceneNavigationStack: WhimScene {
 
     /// Pushes a scene onto the receiver’s stack, and updates the display if self is also on top of the stack.
     ///
-    /// - Parameter scene: The scene to push onto the stack.
-    ///   If the scene is already on the navigation stack (this or other), this method does nothing.
+    /// - Parameters:
+    ///   - scene: The scene to push onto the stack.
+    ///     If the scene is already on the navigation stack (this or other), this method does nothing.
+    ///   - animating: Animation to be performed, or nil for immediate transition.
     public final func push(scene: WhimScene, animating: WhimSceneAnimatedTransitioning? = WhimSceneAnimatedTransitions.Push()) {
         push(scenes: [scene], animating: animating)
     }
 
     /// Pushes multiple scenes onto the receiver’s stack, and updates the display if self is also on top of the stack.
     ///
-    /// - Parameter scenes: The scenes to push onto the stack.
-    ///   If one of the scenes is already on the navigation stack (this or other), it won't be added here again.
-    ///   If array is empty, nothing will happen.
+    /// - Parameters:
+    ///   - scenes: The scenes to push onto the stack.
+    ///     If one of the scenes is already on the navigation stack (this or other), it won't be added here again.
+    ///     If array is empty, nothing will happen.
+    ///   - animating: Animation to be performed, or nil for immediate transition.
     public final func push(scenes: [WhimScene], animating: WhimSceneAnimatedTransitioning? = WhimSceneAnimatedTransitions.Push()) {
         if scenes.map(add).reduce(false, { $0 || $1 }) {
             present(scene: current, animating: animating)
@@ -79,6 +83,7 @@ open class WhimSceneNavigationStack: WhimScene {
     /// Pops the top scene from the navigation stack if it's not the root scene,
     /// and updates the display if self is on top of the stack.
     ///
+    /// - Parameter animating: Animation to be performed, or nil for immediate transition.
     /// - Returns: The scene that was popped from the stack if it wasn't the root scene.
     ///   Or `nil` if there's only root scene left.
     @discardableResult
@@ -91,8 +96,10 @@ open class WhimSceneNavigationStack: WhimScene {
     /// Pops scenes until the specified scene is at the top of the navigation stack,
     /// and updates the display if self is on top of the stack.
     ///
-    /// - Parameter scene: The scene that you want to be at the top of the stack.
-    ///   This scene must currently be on the navigation stack.
+    /// - Parameters:
+    ///   - scene: The scene that you want to be at the top of the stack.
+    ///     This scene must currently be on the navigation stack.
+    ///   - animating: Animation to be performed, or nil for immediate transition.
     /// - Returns: An array containing the scenes that were popped from the stack.
     ///   Or `nil` if scene isn't present on the navigation stack.
     @discardableResult
@@ -109,6 +116,7 @@ open class WhimSceneNavigationStack: WhimScene {
 
     /// Pops all the scenes on the stack except the root scene, and updates the display if self is on top of the stack.
     ///
+    /// - Parameter animating: Animation to be performed, or nil for immediate transition.
     /// - Returns: An array of scenes representing the items that were popped from the stack.
     @discardableResult
     public final func popToRoot(
@@ -120,20 +128,21 @@ open class WhimSceneNavigationStack: WhimScene {
     /// Pops specified number of the last top scenes from the navigation stack,
     /// and updates the display if self is on top of the stack.
     ///
-    /// If scene to swap with the last one passed,
-    ///
-    /// - Parameter lastScenes: Number of last scenes to remove from the stack. It should be less than the size of the stack.
+    /// - Parameters:
+    ///   - numberOfScenesToPop: Number of last scenes to remove from the stack. It should be less than the size of the stack.
+    ///   - sceneToSwapWith: If scene to swap with the last one is not nil, and it can be added to the stack, then it will swap the remaining top scene after popping last scenes with the given one through this parameter.
+    ///   - animating: Animation to be performed, or nil for immediate transition.
     /// - Returns: A tuple with an array containing the scenes that were popped from the stack.
     ///   Or `[]` if number of scenes to pop is not less than the size of the stack.
     ///   And a boolean value stating whether last scene was swapped or not.
     @discardableResult
     public final func pop(
         lastScenes numberOfScenesToPop: Int,
-        andSwapLastWith scene: WhimScene? = nil,
+        andSwapLastWith sceneToSwapWith: WhimScene? = nil,
         animating: WhimSceneAnimatedTransitioning? = WhimSceneAnimatedTransitions.Pop()
     ) -> (popped: [WhimScene], swapped: Bool) {
         let numberOfScenesToPopIncludingSwap: Int
-        if let scene = scene, canAdd(scene: scene) {
+        if let scene = sceneToSwapWith, canAdd(scene: scene) {
             numberOfScenesToPopIncludingSwap = numberOfScenesToPop + 1
             let numberOfScenesToPopIncludingSwapCondition = scenes.isEmpty
                 ? numberOfScenesToPopIncludingSwap == 1
@@ -154,7 +163,7 @@ open class WhimSceneNavigationStack: WhimScene {
         for scene in poppedScenes {
             scene.relationship.parent = nil
         }
-        if let scene = scene {
+        if let scene = sceneToSwapWith {
             add(scene: scene)
         }
         present(scene: current, animating: animating)
@@ -164,7 +173,9 @@ open class WhimSceneNavigationStack: WhimScene {
     /// Swaps whole stack with the new one, and updates the display if self is on top of the stack.
     /// If stack is empty, will just add new scene.
     ///
-    /// - Parameter scene: new scene to replace all scenes.
+    /// - Parameters:
+    ///   - scene: new scene to replace all scenes.
+    ///   - animating: Animation to be performed, or nil for immediate transition.
     /// - Returns:
     ///   - `false` if new scene couldn't be added.
     ///   - `true` if new scene was added, as a new scene if stack was empty or as a replacement for the old one.
@@ -179,7 +190,9 @@ open class WhimSceneNavigationStack: WhimScene {
     /// Swaps last scene with the new one, and updates the display if self is on top of the stack.
     /// If stack is empty, will just add new scene.
     ///
-    /// - Parameter scene: new scene to replace current last scene.
+    /// - Parameters:
+    ///   - scene: new scene to replace current last scene.
+    ///   - animating: Animation to be performed, or nil for immediate transition.
     /// - Returns:
     ///   - `false` if new scene couldn't be added.
     ///   - `true` if new scene was added, as a new scene if stack was empty or as a replacement for the old one.
