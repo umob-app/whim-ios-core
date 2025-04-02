@@ -1,5 +1,6 @@
 .DS_Store
 /.build
+/.docs
 /Packages
 /*.xcodeproj
 xcuserdata/
@@ -7,5 +8,3 @@ DerivedData/
 .swiftpm/config/registries.json
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
-
-Example/Pods/

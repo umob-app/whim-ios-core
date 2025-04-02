@@ -1,5 +1,4 @@
-CURRENT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-cd $CURRENT_DIR
+cd $(dirname "$0")/../Templates
 
 DESTINATION_DIR=~/Library/Developer/Xcode/Templates/File\ Templates/
 mkdir -p "$DESTINATION_DIR"

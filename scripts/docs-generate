@@ -1,0 +1,3 @@
+sh "$(dirname "$0")/swift-command.sh" package \
+  --allow-writing-to-directory . \
+  generate-documentation --target WhimCore --disable-indexing --output-path ./.docs/. --product WhimCore
