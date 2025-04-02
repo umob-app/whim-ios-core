@@ -321,32 +321,18 @@ extension MapSidebarItem {
 
     public func content(isHighlighted: Bool = false) -> Content {
         switch self {
-            case let .trackUser(highlightedContent, normalContent):
-                if isHighlighted {
-                    if let highlightedContent = highlightedContent {
-                        return highlightedContent.content
-                    }
-                    return .image(UIImage(systemName: "location.fill")!, tintColor: nil)
-                }
-                if let normalContent = normalContent {
-                    return normalContent.content
-                }
-                return .image(UIImage(systemName: "location")!, tintColor: nil)
-            case let .reload(reload):
-                return .view(reload)
-            case let .custom(custom):
-                return custom.content
-            case let .filter(highlightedContent, normalContent, isHighlighted):
-                if isHighlighted {
-                    if let highlightedContent = highlightedContent {
-                        return highlightedContent.content
-                    }
-                    return .image(UIImage(systemName: "gearshape")!, tintColor: nil)
-                }
-                if let normalContent = normalContent {
-                    return normalContent.content
-                }
-                return .image(UIImage(systemName: "gearshape.fill")!, tintColor: nil)
+        case let .trackUser(highlightedContent, normalContent):
+            isHighlighted
+                ? highlightedContent?.content ?? .image(UIImage(systemName: "location.fill")!, tintColor: nil)
+                : normalContent?.content ?? .image(UIImage(systemName: "location")!, tintColor: nil)
+        case let .reload(reload):
+            .view(reload)
+        case let .custom(custom):
+            custom.content
+        case let .filter(highlightedContent, normalContent, isHighlighted):
+            isHighlighted
+                ? highlightedContent?.content ?? .image(UIImage(systemName: "gearshape")!, tintColor: nil)
+                : normalContent?.content ?? .image(UIImage(systemName: "gearshape.fill")!, tintColor: nil)
         }
     }
 
@@ -360,6 +346,10 @@ extension MapSidebarItem {
 
     public static func custom(id: String, view: UIView) -> MapSidebarItem {
         .custom(.init(id: id, content: .view(view)))
+    }
+
+    public static var trackUser: MapSidebarItem {
+        .trackUser(highlightedContent: nil, normalContent: nil)
     }
 
     public static func filter(isHighlighted: Bool) -> MapSidebarItem {

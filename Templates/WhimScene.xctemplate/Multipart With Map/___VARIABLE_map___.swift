@@ -40,7 +40,9 @@ final class ___VARIABLE_map:identifier___: WhimScenePresentation {
             return
         }
         if isActive {
-            mapLayerManager.requestControlForLayer(with: map.layer.token)
+            mapLayerManager.requestControlForLayer(with: map.layer.token) { ctx in
+                return .none
+            }
         } else {
             mapLayerManager.relinquishControlForLayer(with: map.layer.token)
         }

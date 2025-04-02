@@ -56,9 +56,7 @@ final class ___VARIABLE_store:identifier___: WhimSceneStore {
     private let system: FeedbackSystem<State, Event>
     private let actions = PublishRelay<Action>()
 
-    var state: Observable<State> {
-        return system.asObservable()
-    }
+    var state: Observable<State> { system.asObservable() }
 
     var routes: Observable<Route> {
         return system.eventsWithState.compactMap { [weak self] event, state in
