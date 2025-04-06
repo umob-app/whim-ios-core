@@ -1,12 +1,14 @@
 # 🛤️ Navigation
 
-A custom Navigation Stack that handles multipart (top/bottom) screens along with regular screens, allowing nested stacks. 
+A custom Navigation Stack that handles multipart (top/bottom) screens along with regular screens, allowing nested stacks.
 
 ## Overview
 
 To understand why someone would need to build their own navigation stack, you need to understand the requirements to the app we were building :-)
 
 Most of the user experience was revolving around a map. So pretty much majority of the screens related to MaaS orders had the same structure - a top bar, a bottom card that could slide up and down and a map in the middle underneath them. Sometimes those screens would stack on top of each other which meant keeping all those maps in memory, then there should've been a common way to work with maps, and moving between screens was not smooth as every screen was showing its own map, when in reality only top and bottom parts should've been moving.
+
+![Visualizing navigation stack problem described earlier](navigation)
 
 > We're talking more about maps in the <doc:Map> document.
 

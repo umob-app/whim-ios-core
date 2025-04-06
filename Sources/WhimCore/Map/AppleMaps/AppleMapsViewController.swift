@@ -7,8 +7,12 @@ import OrderedCollections
 
 // MARK: - View Controller
 
+/// Whoever embeds the map to itself (a WhimSceneContainerViewController or UIViewController), should implement this protocol to specify the interactive bounds of the map.
 public protocol MapViewControllerDynamicLayoutGuide: AnyObject {
+    /// Affects how the map treats its layout margins (including rendering of the legal label and logo), and updates layer's ``MapLayer/visibleRectInset`` if needed.
     var mapVerticalInset: ObservableProperty<VerticalInsets> { get }
+    /// Affects where (from the bottom) a map sidebar should be rendered.
+    /// If you are using a ``BottomPanel``, then you should subscribe to its updates os that the sidebar could move along with the bottom panel.
     var mapSidebarBottomInset: ObservableProperty<CGFloat> { get }
 }
 

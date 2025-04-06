@@ -127,10 +127,10 @@ public enum MapZoomLevel: Equatable {
     /// Additionally you can specify padding by applying factor multiplier first, and edge insets afterwards.
     case span(MapCoordinateSpan, Padding)
 
-    /// Minimal possible zoom level.
-    static let min: MapZoomLevel = .zoom(minZoomLevel)
-    /// Maximum possible zoom level.
-    static let max: MapZoomLevel = .zoom(maxZoomLevel)
+    /// Minimal possible zoom level (3).
+    public static let min: MapZoomLevel = .zoom(minZoomLevel)
+    /// Maximum possible zoom level (20).
+    public static let max: MapZoomLevel = .zoom(maxZoomLevel)
 
     static let minZoomLevel: Double = 3
     static let maxZoomLevel: Double = 20
@@ -159,10 +159,12 @@ public extension MapZoomLevel {
         return .zoom(transform(zoom))
     }
 
+    /// Returns a zoom level incremented by one (if its value is `zoom`, otherwise - its current value).
     func zoomedIn() -> MapZoomLevel {
         updatingZoom { $0 + 1 }
     }
 
+    /// Returns a zoom level decremented by one (if its value is `zoom`, otherwise - its current value).
     func zoomedOut() -> MapZoomLevel {
         updatingZoom { $0 - 1 }
     }

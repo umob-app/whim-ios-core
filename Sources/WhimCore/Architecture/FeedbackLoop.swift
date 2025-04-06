@@ -6,12 +6,8 @@ import RxRelay
 
 /// Unidirectional Reactive Architecture.
 ///
-/// The intention to build custom implementation was to be closer to the ReactiveFeedback (now Loop) and CombineFeedback
+/// The intention to build a custom implementation was to be closer to the ReactiveFeedback (now Loop) and CombineFeedback
 /// as these implementations are more actively supported and should allow easier transition to Combine in the future.
-///
-/// ReactiveFeedback (now Loop) and CombineFeedback are very much the same and I trust their implementation,
-/// as ReactiveFeedback/Loop is used in BabylonHealth iOS application (in production) and is developed bvy the community.
-/// That said, it should be easier for us to create similar Combine implementation based on CombineFeedback.
 ///
 /// Here's a diagram and a brief description demonstrating how feedbacks are built on top of one another:
 ///
@@ -47,25 +43,25 @@ import RxRelay
 ///                                                                              └─────────────────┘
 /// ```
 ///
-/// - `init(events:)`
+/// - ``init(events:)``
 ///    is a very base initializer, and everything else is built on top of it,
 ///    it receives a function with scheduler and stream of state updates and events,
 ///    and returns a stream of new events, which will be used to update state through system's reducer.
 ///
-///    - `just(effects:)`
+///    - ``just(effects:)``
 ///       is a simple feedback that ignores any state updates or emitted events, but just streams its own events,
 ///       it is very handy to pass events into the system from the outside world (UI, notifications, etc).
 ///
-///       - `empty()` and `never()` are shortcuts for `just(effects:)`
+///       - ``empty()`` and ``never()`` are shortcuts for ``just(effects:)``
 ///          with only `Observable.empty()` and `Observable.never()` passed as effects respectively.
 ///          prior one completed immediately, latter one never completes by itself.
 ///
-///    - `withLatest(transform:effects:)`
+///    - ``withLatest(state:effects:)``
 ///       is used to transform either stream of state updates or emitted events into stream of other values,
 ///       each new value from the resulting stream will generate new side-effect and kill previous one if such is in progress.
 ///       it is treated as a baseline for other common transformations, but can be used on its own to achieve more specific results.
 ///
-///       - `lensing(transform:effects:)` or `extracting(transform:effects:)`
+///       - ``lensing(state:effects:)`` or ``extracting(payload:effects:)``
 ///          sorry for the name, it comes from FP and is common to other libraries, so I decide to keep it,
 ///          it transforms state into one of its parts if such exists or `nil` if state isn't in a needed shape,
 ///          you basically focus on a sub-state as if you're using a lense to zoom into it, thus the name.
@@ -73,30 +69,30 @@ import RxRelay
 ///          however if it returns value, new effect will be triggered with that value and existing one will be killed if exists.
 ///          same for `extracting` but here we're extracting a payload from the emitted event instead of lensing into sub-state.
 ///
-///       - `lensingSkippingRepeated(transform:effects:)` or `extractingSkippingRepeated(transform:effects:)`
+///       - ``lensingSkippingRepeated(state:effects:)`` or ``extractingSkippingRepeated(payload:effects:)``
 ///          very much the same as `lensing`, but in case we get same results of transformation in a row, duplicates will be ignored,
 ///          hence if a feedback was triggered by some value, and transform results with the same value again and again,
 ///          existing effect will not be killed.
 ///          however if it results with a new value or `nil`, any previously started effect will be killed.
 ///          same for `extracting` but here we're extracting a payload from the emitted event instead of lensing into sub-state.
 ///
-///       - `skippingRepeated(transform:effects:)`
+///       - ``skippingRepeated(state:effects:)``
 ///          starts new effect with a whole state every time transform results with a new value, distinct from a previous one,
 ///          if transform produces multiple similar values in a row, existing effect will not be killed,
 ///          however if transform produces a value distinct from a previous one, existing effect will be killed if such exists.
 ///
-///       - `firstValueAfterNil(transform:effects:)`
+///       - ``firstValueAfterNil(state:effects:)``
 ///          starts new effect when a value is received after a sequence of `nil`,
 ///          other values are ignored and original value's effect keeps on living,
 ///          however, once `nil` is received, any outstanding effect is killed.
-///          same is for `whenBecomesTrue(predicate:effets:)`, except instead of value/nil there's true/false respectively.
+///          same is for ``whenBecomesTrue(state:effects:)``, except instead of value/nil there's true/false respectively.
 ///
-///    - `merging(transform:effects:)`
+///    - ``merging(state:effects:)``
 ///       is used to transform either stream of state updates or emitted events into stream of other values,
 ///       each new value from the resulting stream will generate new side-effect, and will not kill those that are already running
 ///       unlike `withLatest`, if there're multiple effects alive, their events streams will be merged together in the system.
 ///
-///    - `imperative(effects:)`:
+///    - ``imperative(effects:)``
 ///       can be used if reactive code is not preferred (i.e. hard to understand/maintain by the team),
 ///       it is triggered each time an event is emitted (by the system or from external source),
 ///       it receives an event and a state of the system at that time, and a callback to emmit new event as a result of its work.
@@ -373,7 +369,7 @@ public extension Feedback {
     ///                      and a callback yielding events that eventually affect the state.
     ///
     /// Example:
-    /// ```
+    /// ```swift
     /// Feedback.imperative(effects: { callback in
     ///     let someLocalState: Int = 42
     ///

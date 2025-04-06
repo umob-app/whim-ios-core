@@ -2,10 +2,6 @@
 
 Various WhimCore Utilities.
 
-## Overview
-
-
-
 ## Topics
 
 ### Default Top Bar

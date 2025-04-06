@@ -17,6 +17,10 @@ Core utilities and architecture components for iOS applications.
 - [UI](Sources/WhimCore/Documentation.docc/UI.md)
 - [Navigation](Sources/WhimCore/Documentation.docc/Navigation.md)
 - [Map](Sources/WhimCore/Documentation.docc/Map.md)
+- [GeoHash-Caching](Sources/WhimCore/Documentation.docc/GeoHash-Caching.md)
+- [Bottom-Panel](Sources/WhimCore/Documentation.docc/Bottom-Panel.md)
+- [Utils](Sources/WhimCore/Documentation.docc/Utils.md)
+
 
 Documentation is organized in the [Swift DocC](https://www.swift.org/documentation/docc) format.
 You can build it from command line and view as a website, or it can be built from Xcode.
