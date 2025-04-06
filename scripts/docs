@@ -1,0 +1,2 @@
+"$(dirname "$0")/docs-generate"
+"$(dirname "$0")/docs-preview"

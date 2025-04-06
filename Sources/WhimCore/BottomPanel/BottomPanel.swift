@@ -164,7 +164,7 @@ public enum BottomPanelRestorationPoint {
 ///
 /// Most of the properties are provided with default values, so minimum required setup would be
 /// to provide `bottomPanelHandler` and become its `bottomPanel`:
-/// ```
+/// ```swift
 /// final class MenuViewController: UIViewController, BottomPanel {
 ///     private(set) lazy var bottomPanelHandler = { BottomPanelHandler(bottomPanel: self) }()
 /// }

@@ -36,7 +36,7 @@ public enum ProximityHash {
         case included
     }
 
-    /// Generates a set of geohashes that approximate a circle.
+    /// Generates a set of geohashes that approximate a given area region.
     ///
     /// There will always be at least center point's geohash,
     /// no matter what bounds preference is and how small the region area is, even if it's smaller than the geohash cell.
@@ -44,7 +44,7 @@ public enum ProximityHash {
     /// - Parameters:
     ///   - region: region of the area we want to calculate geohashes for
     ///   - length: length of geohash strings from 1 to 12. The higher the number, the smaller the cells will be
-    ///   - bounds: a preference to either get fully included geohashes inside a region area,
+    ///   - includingIntersecting: a preference to either get fully included geohashes inside a region area,
     ///     or to keep geohashes that intersect region area even a bit
     /// - Returns: unqiue set of geohash strings
     public static func geohashes(

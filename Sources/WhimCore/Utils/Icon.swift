@@ -2,6 +2,9 @@ import UIKit
 import RxSwift
 
 // sourcery: Random
+/// A simple abstraction over image retreival.
+///
+/// Implementation is left to the user, because it can heavily depend on a way loading and caching is performed.
 public enum Icon: Hashable, Equatable {
     // sourcery: Random
     public enum Placeholder: Hashable {

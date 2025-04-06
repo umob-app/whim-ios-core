@@ -1,0 +1,3 @@
+sh "$(dirname "$0")/swift-command.sh" package \
+  --disable-sandbox \
+  preview-documentation --target WhimCore

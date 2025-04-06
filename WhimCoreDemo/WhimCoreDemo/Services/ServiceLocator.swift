@@ -1,3 +1,9 @@
+/// How To Control The World
+///   * [Service Locator](https://gameprogrammingpatterns.com/service-locator.html)
+///   * [NSSPain Talk](https://vimeo.com/291588126)
+///   * Pointfree episodes [16](https://www.pointfree.co/episodes/ep16-dependency-injection-made-easy) and [18](https://www.pointfree.co/episodes/ep18-dependency-injection-made-comfortable)
+///   * [BabylonHealth Example](https://github.com/babylonhealth/ios-playbook/blob/master/Cookbook/Proposals/ControlTheWorld.md)
+///
 struct ServiceLocator {
     let mapLayerManager: DemoMapLayerManager
     let userLocationService: UserLocationServing

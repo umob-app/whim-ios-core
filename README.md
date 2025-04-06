@@ -3,15 +3,45 @@
 
 Core utilities and architecture components for iOS applications.
 
-- Whim Architecture Tools
+- Whim Architecture & UI Tools
 - User Flow Navigation
 - Abstract Shared Map
+- Geo Hash & Caching + Proximity Hash
 - Sliding Bottom Panel
+- Testing Tools
 - Xcode Templates
 
 ## Documentation
 
-- [Architecture](Documents/ARCHITECTURE.md)
+- [Architecture](Sources/WhimCore/Documentation.docc/Architecture.md)
+- [UI](Sources/WhimCore/Documentation.docc/UI.md)
+- [Navigation](Sources/WhimCore/Documentation.docc/Navigation.md)
+- [Map](Sources/WhimCore/Documentation.docc/Map.md)
+- [GeoHash-Caching](Sources/WhimCore/Documentation.docc/GeoHash-Caching.md)
+- [Bottom-Panel](Sources/WhimCore/Documentation.docc/Bottom-Panel.md)
+- [Utils](Sources/WhimCore/Documentation.docc/Utils.md)
+
+
+Documentation is organized in the [Swift DocC](https://www.swift.org/documentation/docc) format.
+You can build it from command line and view as a website, or it can be built from Xcode.
+
+#### To generate it from the Xcode and view it along with the rest of the documentation opened in Xcode perform next steps:
+- open the WhimCore package (`open Package.swift`)
+- go to Product > Build Documentation (`⌃ ⇧ ⌘ D`)
+> note: once you close the package, documentation closes too.
+
+#### To generate DocC from the command line and preview it in the browser execute the following scripts:
+```bash
+scripts/docs
+open "http://localhost:8080/documentation/whimcore"
+```
+It will generate docs into a temporary `.docs` directory and run a local server on 8080 port. It's all handled by the `swift package` tool.
+
+## Demo Project
+
+Run the `WhimCoreDemo/WhimCoreDemo.xcodeproj` project in your Xcode.
+No additional setup is needed as it's using SPM for extra dependencies.
+WhimCoreDemo is intended mostly for exploration and showcasing the tools.
 
 ## Requirements
 
@@ -21,7 +51,7 @@ Core utilities and architecture components for iOS applications.
 ## Templates
 
 Xcode Templates for creating screens and services can be found in `Templates` directory.
-Execute `./Templates/install` script to install them, or add them manually into the `~/Library/Developer/Xcode/Templates/File Templates/` direcory.
+Execute `scripts/templates` script to install them, or add them manually into the `~/Library/Developer/Xcode/Templates/File Templates/` direcory.
 
 ## Contributors
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->

@@ -40,7 +40,7 @@ final class HomeViewController: WhimSceneContainerViewController, MapViewControl
                     }
                     return Observable.combineLatest(bottom.rx.viewDidAppear, bottomPanelStickyPoints)
                         .take(until: bottom.rx.viewDidDisappear)
-                        .observe(on:MainScheduler.asyncInstance)
+                        .observe(on: MainScheduler.asyncInstance)
                         .map { _, stickyPoints in
                             let bottomInset = zip(mapViewController?.view.bounds.height, stickyPoints.last).map(-)
                                 ?? bottom.view.bounds.height
