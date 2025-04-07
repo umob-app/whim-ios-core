@@ -1,2 +1,16 @@
 "$(dirname "$0")/docs-generate"
+
+YELLOW="\033[1;33m"
+GREEN="\033[0;32m"
+NC="\033[0m"
+UNDERLINE="\e[4m"
+NORMAL="\e[0m"
+DOCS_URL="http://localhost:8080/documentation/"
+
+printf "${YELLOW}╔═════════════════════════════════════════════════════════════════════════════╗${NC}\n"
+printf "${YELLOW}║                                                                             ║${NC}\n"
+printf "${YELLOW}║ Please visit ${GREEN}${UNDERLINE}${DOCS_URL}${NORMAL} ${YELLOW}to view the documentation ║${NC}\n"
+printf "${YELLOW}║                                                                             ║${NC}\n"
+printf "${YELLOW}╚═════════════════════════════════════════════════════════════════════════════╝${NC}\n"
+
 "$(dirname "$0")/docs-preview"

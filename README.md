@@ -20,7 +20,7 @@ Core utilities and architecture components for iOS applications.
 - [GeoHash-Caching](Sources/WhimCore/Documentation.docc/GeoHash-Caching.md)
 - [Bottom-Panel](Sources/WhimCore/Documentation.docc/Bottom-Panel.md)
 - [Utils](Sources/WhimCore/Documentation.docc/Utils.md)
-
+- [WhimCoreTest](Sources/WhimCoreTest/Documentation.docc/Documentation.md)
 
 Documentation is organized in the [Swift DocC](https://www.swift.org/documentation/docc) format.
 You can build it from command line and view as a website, or it can be built from Xcode.
@@ -33,7 +33,7 @@ You can build it from command line and view as a website, or it can be built fro
 #### To generate DocC from the command line and preview it in the browser execute the following scripts:
 ```bash
 scripts/docs
-open "http://localhost:8080/documentation/whimcore"
+open "http://localhost:8080/documentation"
 ```
 It will generate docs into a temporary `.docs` directory and run a local server on 8080 port. It's all handled by the `swift package` tool.
 
