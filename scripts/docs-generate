@@ -1,3 +1,20 @@
-sh "$(dirname "$0")/swift-command.sh" package \
-  --allow-writing-to-directory . \
-  generate-documentation --target WhimCore --disable-indexing --output-path ./.docs/. --product WhimCore
+ROOT_DIR="$(dirname "$0")/.."
+DOCS="$ROOT_DIR/.docs"
+WHIM_CORE_ARCHIVE="$DOCS/WhimCore.doccarchive"
+WHIM_CORE_TEST_ARCHIVE="$DOCS/WhimCoreTest.doccarchive"
+PACKAGE_ARCHIVE="$DOCS/WhimCorePackage.doccarchive"
+
+mkdir -p "$DOCS"
+
+# WhimCore is built for iOS because of its dependency on UIKit
+sh "$(dirname "$0")/swift-ios-command.sh" package \
+  --allow-writing-to-directory "$ROOT_DIR" \
+  generate-documentation --target WhimCore --disable-indexing --output-path "$WHIM_CORE_ARCHIVE" --product WhimCore
+
+# WhimCoreTest is built for macOS because of its testing dependencies
+sh "$(dirname "$0")/swift-macos-command.sh" package \
+  --allow-writing-to-directory "$ROOT_DIR" \
+  generate-documentation --target WhimCoreTest --disable-indexing --output-path "$WHIM_CORE_TEST_ARCHIVE" --product WhimCoreTest
+
+rm -rf "$PACKAGE_ARCHIVE"
+xcrun docc merge "$WHIM_CORE_ARCHIVE" "$WHIM_CORE_TEST_ARCHIVE" --output-path "$PACKAGE_ARCHIVE"

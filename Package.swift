@@ -12,6 +12,10 @@ let package = Package(
             name: "WhimCore",
             targets: ["WhimCore"]
         ),
+        .library(
+            name: "WhimCoreTest",
+            targets: ["WhimCoreTest"]
+        ),
     ],
     dependencies: [
         // Sources
@@ -34,8 +38,16 @@ let package = Package(
                 .product(name: "OrderedCollections", package: "swift-collections"),
             ]
         ),
+        .target(
+            name: "WhimCoreTest",
+            dependencies: [
+                "Quick",
+                "Nimble",
+                .product(name: "RxTest", package: "RxSwift"),
+            ]
+        ),
         .testTarget(
-            name: "WhimCoreTests",
+            name: "WhimCoreUnitTests",
             dependencies: [
                 "WhimCore",
                 "Quick",
