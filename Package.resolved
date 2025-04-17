@@ -84,7 +84,7 @@
     {
       "identity" : "whim-ios-random",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/maasglobal/whim-ios-random.git",
+      "location" : "https://github.com/umob-app/whim-ios-random.git",
       "state" : {
         "branch" : "main",
         "revision" : "4d677a50badee6084f0516076158d64f3c4efad8"
