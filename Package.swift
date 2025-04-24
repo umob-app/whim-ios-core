@@ -1,11 +1,13 @@
-// swift-tools-version: 5.7
-
+// swift-tools-version: 5.9
 import PackageDescription
+import CompilerPluginSupport
 
 let package = Package(
     name: "whim-ios-core",
     platforms: [
-        .iOS(.v14)
+        .iOS(.v14),
+        // Macros
+        .macOS(.v10_15),
     ],
     products: [
         .library(
@@ -26,6 +28,8 @@ let package = Package(
         .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "9.0.0")),
         .package(url: "https://github.com/stanfy/SwiftyMock.git", branch: "spm"),
         .package(url: "https://github.com/umob-app/whim-ios-random.git", branch: "main"),
+        // Macros
+        .package(url: "https://github.com/apple/swift-syntax.git", from: "509.0.0"),
         // Other
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
     ],
@@ -44,6 +48,13 @@ let package = Package(
                 "Quick",
                 "Nimble",
                 .product(name: "RxTest", package: "RxSwift"),
+            ]
+        ),
+        .macro(
+            name: "WhimCoreMacros",
+            dependencies: [
+                .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
+                .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
             ]
         ),
         .testTarget(
