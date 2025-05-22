@@ -60,6 +60,9 @@ Execute `scripts/templates` script to install them, or add them manually into th
     <td align="center"><a href="https://github.com/a-voronov"><img src="https://avatars.githubusercontent.com/u/11717236?v=4" width="100px;" alt=""/><br /><sub><b>Oleksandr Voronov</b></sub></a><br /><a href="https://github.com/umob-app/whim-ios-core/commits?author=a-voronov" title="Idea & Implementation">💡💻</a></td>
     <td align="center"><a href="https://github.com/kanh296"><img src="https://avatars.githubusercontent.com/u/93093745?v=4" width="100px;" alt=""/><br /><sub><b>Anh Hoang</b></sub></a><br /><a href="https://github.com/umob-app/whim-ios-core/commits?author=kanh296" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/volatilegg"><img src="https://avatars.githubusercontent.com/u/3374348?v=4" width="100px;" alt=""/><br /><sub><b>Duc Do</b></sub></a><br /><a href="https://github.com/umob-app/whim-ios-core/commits?author=volatilegg" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/RubenEsposito"><img src="https://avatars.githubusercontent.com/u/780945?v=4" width="100px;" alt=""/><br /><sub><b>Ruben Marin</b></sub></a><br /><a href="https://github.com/umob-app/whim-ios-core/commits?author=RubenEsposito" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/zyrikin"><img src="https://avatars.githubusercontent.com/u/3982699?v=4" width="100px;" alt=""/><br /><sub><b>Nik Zakirin</b></sub></a><br /><a href="https://github.com/umob-app/whim-ios-core/commits?author=zyrikin" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mario2r"><img src="https://avatars.githubusercontent.com/u/11093933?v=4" width="100px;" alt=""/><br /><sub><b>Mario Romero</b></sub></a><br /><a href="https://github.com/umob-app/whim-ios-core/commits?author=mario2r" title="Code">💻</a></td>
   </tr>
 </table>
 
